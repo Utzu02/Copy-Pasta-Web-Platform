@@ -10,14 +10,38 @@ const ContactFrom = () => {
         email: '',
         message: ''
     });
-
+    const [errors, setErrors] = useState({});
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        // Validare câmpuri
+        const newErrors = {};
+        if (!formData.firstName.trim()) newErrors.firstName = 'First Name is required';
+        if (!formData.lastName.trim()) newErrors.lastName = 'Last Name is required';
+        if (!formData.email.trim()) newErrors.email = 'Email is required';
+        if (!formData.message.trim()) newErrors.message = 'Message is required';
+
+        // Dacă există erori, le afișăm și nu trimitem formularul
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return;
+        }
+
+        // Dacă nu există erori, trimitem datele (exemplu: log în consolă)
         console.log('Form Data Submitted:', formData);
+
+        // Resetează formularul (opțional)
+        setFormData({
+            firstName: '',
+            lastName: '',
+            email: '',
+            message: '',
+        });
+        setErrors({});
     };
 
 
@@ -35,6 +59,7 @@ const ContactFrom = () => {
                                 value={formData.firstName}
                                 onChange={handleChange}
                             />
+                            {errors.firstName && <p style={{ color: 'red' }}>{errors.firstName}</p>}
                         </div>
                         <div className="form-group">
                             <input
@@ -44,6 +69,7 @@ const ContactFrom = () => {
                                 value={formData.lastName}
                                 onChange={handleChange}
                             />
+                            {errors.lastName && <p style={{ color: 'red' }}>{errors.lastName}</p>}
                         </div>
                         <div className="form-group">
                             <input
@@ -53,6 +79,7 @@ const ContactFrom = () => {
                                 value={formData.email}
                                 onChange={handleChange}
                             />
+                            {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
                         </div></div>
                     <div className=''>
                         <div className="form-group">
@@ -62,6 +89,7 @@ const ContactFrom = () => {
                                 value={formData.message}
                                 onChange={handleChange}
                             ></textarea>
+                            {errors.message && <p style={{ color: 'red' }}>{errors.message}</p>}
                         </div>
                     </div>
                 </div>

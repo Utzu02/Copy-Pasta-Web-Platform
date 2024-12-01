@@ -5,7 +5,7 @@
 nav {
     /*stilizare navbar*/
     position: absolute;
-    width: 100vw;
+    width: 100%;
     min-height: 11vh;
     left: 0;
     right: 0px;

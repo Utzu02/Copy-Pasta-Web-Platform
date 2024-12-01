@@ -1,8 +1,9 @@
 .homepageLogo {
     margin-bottom: 2dvh;
-    width: 25vmax;
+    width: 27vmax;
     display: flex;
     justify-content: center;
+    padding-left: 7vw;
     align-items: center;
 }
 
@@ -93,4 +94,8 @@
     font-size: 20px;
     text-align: center;
     color: #000000;
+}
+
+footer svg {
+    display: block;
 }
