@@ -6,9 +6,9 @@ nav {
     /*stilizare navbar*/
     position: absolute;
     width: 100vw;
-    height: 11vh;
+    min-height: 11vh;
     left: 0px;
-    gap:10vw;
+    gap:8vw;
     top: 0px;
     display: flex;
     background: #00236D;
@@ -24,14 +24,33 @@ nav ul {
     list-style: none;
     gap: 35px;
 }
-
-.recipes, .addRecipe {
+nav ul li {
+    position: relative;
+}
+.loginSVG {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.setari {
+    position: relative;
+    margin-left: auto;
+    right: 4vw;
+}
+.textLogin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    margin: 0 auto !important;
+}
+.textSectiuni {
     /*text pentru linkurile de recipe si add recipe*/
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 600;
     font-size: 22px;
-
     color: #FFFFFF;
 }
 
@@ -41,7 +60,7 @@ nav ul {
     align-items: center;
     justify-content: center;
     position: relative;
-    left: 5vw;
+    left: 4vw;
 }
 
 .logoText {

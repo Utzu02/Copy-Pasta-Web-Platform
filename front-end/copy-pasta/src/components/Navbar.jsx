@@ -1,9 +1,48 @@
 import { useState } from 'react'
 import './NavStyle.css'
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const location = useLocation();
+  const checkToken = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    setIsLoggedIn(true);
+  }
+
+  const optiuniConfigurari = () => {
+    if(location.pathname === '/profile' && isLoggedIn)
+    {
+      return (
+        <ul className='setari'><li><Link to="/logout" className='textSectiuni'>Logout</Link></li></ul>
+      )
+    }
+    else if(location.pathname === '/profile')
+    {
+      return (<Navigate to='/'/>)
+    }
+    else if (isLoggedIn) {return (
+      <ul className='setari'><li><Link to="/profile" className='textSectiuni'>Profile</Link></li></ul>
+    )}
+    else {return (
+      <ul className='setari'>
+        <li>
+          <Link to="/login" className='textSectiuni'>
+          <svg className='loginSVG' width="124" height="52" viewBox="0 0 124 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect opacity="0.85" x="1.5" y="1.5" width="121" height="49" rx="19.5" stroke="white" stroke-width="3"/>
+          </svg>
+          <p className='textLogin'>Login</p>
+          </Link>
+        </li>
+        <li><Link to="/register" className='textSectiuni'>Register</Link></li>
+      </ul>
+    )}
+
+  }
+  if(location.pathname === '/not-found') return null
   return (
     <nav>
       <div className='navLogo'><Link to="/">
@@ -17,12 +56,13 @@ const Navbar = () => {
           <path d="M21.4202 23.1599H11.8965V56.9454H21.4202V23.1599Z" fill="#009C41" />
           <path d="M36.6236 16.9083H27.0999V56.9587H36.6236V16.9083Z" fill="#009C41" />
         </svg>
-        </Link>
+      </Link>
       </div>
-      <ul>
-        <li><Link to="/recipes" className='recipes'>Recipes</Link></li>
-        <li><Link to="/add-recipe" className='addRecipe'>Add Recipe</Link></li>
+      <ul className='sectiuni'>
+        <li><Link to="/recipes" className='textSectiuni'>Recipes</Link></li>
+        <li><Link to="/add-recipe" className='textSectiuni'>Add Recipe</Link></li>
       </ul>
+      {optiuniConfigurari()}
     </nav>
   )
 }

@@ -3,10 +3,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './../styles/AllStyles.css'
 
-const Recipes = () => {
+const Profile = () => {
     return (
-        <>
-        </>
+          <>
+          </>
       )
 }
-export default Recipes
+export default Profile

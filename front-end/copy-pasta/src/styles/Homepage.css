@@ -1,0 +1,12 @@
+.homepageLogo {
+    margin-bottom: 3vh;
+    width: 25vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.homepage {
+    height: 100vh;
+    margin-left: 11vw;
+}
