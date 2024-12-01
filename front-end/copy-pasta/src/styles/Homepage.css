@@ -9,7 +9,6 @@
 
 .topRated h2 {
     padding-top: 4vh;
-
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
@@ -36,11 +35,8 @@
 }
 
 .item img {
-    padding-left: 1vw;
-    padding-right: 1vw;
     display: flex;
-    width: 13vw;
-    height: 27vh;
+    height: 28vh;
 }
 
 .informatii {
@@ -56,7 +52,7 @@
     padding-left: 0 !important;
     padding-right: 0 !important;
     min-height: 20vh !important;
-    width: 0.5vw !important;
+    width: auto !important;
 }
 
 .topRated {
@@ -98,4 +94,15 @@
 
 footer svg {
     display: block;
+}
+footer {
+    position: relative;
+    display: flex;
+}
+.retele-media {
+    position: absolute;
+    gap: 1.5vw;
+}
+.retele-media img{
+    width: 3.2vw;
 }

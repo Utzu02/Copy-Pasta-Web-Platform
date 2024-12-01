@@ -1,0 +1,14 @@
+footer svg {
+    display: block;
+}
+footer {
+    position: relative;
+    display: flex;
+}
+.retele-media {
+    position: absolute;
+    gap: 1.5vw;
+}
+.retele-media img{
+    width: 3.2vw;
+}

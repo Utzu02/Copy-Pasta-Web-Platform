@@ -3,6 +3,9 @@ html,body,* {
   padding: 0;
   box-sizing: content-box;
 }
+html,body {
+  overflow-x: hidden;
+}
 body {
   width: 100vw;
   overflow-x: hidden;

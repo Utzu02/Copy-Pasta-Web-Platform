@@ -2,7 +2,7 @@
 
 /* Stilul general al containerului */
 .contact {
-    height: 50vh;
+    min-height: 50vh;
     width: 70vw;
     position: relative;
     left: 50%;
@@ -77,9 +77,28 @@
     cursor: pointer;
     transition: background-color 0.3s;
   }
-  
+  .submit-btn.mobil {
+    position: relative;
+  }
   /* Hover pe buton */
   .submit-btn:hover {
     background-color: #007B35;
   }
-  
+  .form-group.mobil input{
+    font-size: 17px;
+    width: 50vw !important;
+  }
+  .form-group.mobil textarea {
+    width: 50vw !important;
+    font-size: 17px;
+    height: 14vh !important;
+  }
+  .contact.mobil {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .contact.mobil h2 {
+    font-size: 35px;
+  }

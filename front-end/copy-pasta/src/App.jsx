@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import { Navigate } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -13,11 +13,31 @@ import AddRecipes from './pages/AddRecipes';
 import NotFound from './pages/NotFound';
 
 function App() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Actualizează starea în funcție de dimensiunea ecranului
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Verificăm dimensiunea la montare
+    handleResize();
+
+    // Adăugăm un event listener pentru redimensionare
+    window.addEventListener("resize", handleResize);
+
+    // Eliminăm event listener la demontare
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <Router>
-      <Navbar /> {/* Navbar-ul este afișat mereu, indiferent de rută */}
+      {<Navbar isMobile={isMobile}/>}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home isMobile={isMobile}/>} />
         <Route path="/recipes" element={<Recipes />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/register" element={<Register />} />

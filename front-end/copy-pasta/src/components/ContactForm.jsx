@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './Contact.css';
 import './../styles/AllStyles.css'
 
-const ContactFrom = () => {
+const ContactFrom = ({ isMobile }) => {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -45,7 +45,7 @@ const ContactFrom = () => {
     };
 
 
-    return (
+    if (!isMobile) return (
         <div className="contact">
             <h2>Contact us</h2>
             <form className="contact-form" onSubmit={handleSubmit}>
@@ -97,5 +97,56 @@ const ContactFrom = () => {
             </form>
         </div>
     );
+    else return (
+        <div className="contact mobil">
+            <h2>Contact us</h2>
+            <form className="contact-form" onSubmit={handleSubmit}>
+                <div className='flex form-div'>
+                    <div className='flex nume'>
+                        <div className="form-group mobil">
+                            <input
+                                type="text"
+                                name="firstName"
+                                placeholder="First Name"
+                                value={formData.firstName}
+                                onChange={handleChange}
+                            />
+                            {errors.firstName && <p style={{ color: 'red' }}>{errors.firstName}</p>}
+                        </div>
+                        <div className="form-group mobil">
+                            <input
+                                type="text"
+                                name="lastName"
+                                placeholder="Last Name"
+                                value={formData.lastName}
+                                onChange={handleChange}
+                            />
+                            {errors.lastName && <p style={{ color: 'red' }}>{errors.lastName}</p>}
+                        </div>
+                        <div className="form-group mobil">
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                                value={formData.email}
+                                onChange={handleChange}
+                            />
+                            {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
+                        </div>
+                        <div className="form-group mobil">
+                            <textarea
+                                name="message"
+                                placeholder="Message"
+                                value={formData.message}
+                                onChange={handleChange}
+                            ></textarea>
+                            {errors.message && <p style={{ color: 'red' }}>{errors.message}</p>}
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" className="submit-btn mobil">Submit</button>
+            </form>
+        </div>
+    )
 }
 export default ContactFrom
