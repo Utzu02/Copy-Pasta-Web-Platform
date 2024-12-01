@@ -6,7 +6,91 @@
     align-items: center;
 }
 
+.topRated h2 {
+    padding-top: 4vh;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 59px;
+    text-align: center;
+
+    color: #FFFFFF;
+    padding-bottom: 2vh;
+
+}
+
+.items {
+    justify-content: space-evenly;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    flex-wrap: wrap;
+    padding-bottom: 7vh;
+}
+
+.item {
+    margin-top: 5vh;
+    background-color: white;
+}
+
+.item img {
+    padding-left: 1vw;
+    padding-right: 1vw;
+    display: flex;
+    width: 13vw;
+    height: 27vh;
+}
+
+.informatii {
+    padding-left: 2vw;
+    padding-right: 2vw;
+}
+
 .homepage {
     height: 100vh;
-    margin-left: 11.5vw;
+}
+
+.linie {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    min-height: 20vh !important;
+    width: 0.5vw !important;
+}
+
+.topRated {
+    width: 100vw;
+    left: 0;
+    min-height: 40vh;
+    background: #00236D;
+}
+
+.titlureteta {
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    text-align: center;
+    color: #000000;
+}
+
+.informatiisuplimentare {
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+    text-align: center;
+    color: #000000;
+}
+
+.autor {
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    text-align: center;
+    color: #000000;
 }

@@ -7,7 +7,8 @@ nav {
     position: absolute;
     width: 100vw;
     min-height: 11vh;
-    left: 0px;
+    left: 0;
+    right: 0px;
     gap:8vw;
     top: 0px;
     display: flex;
