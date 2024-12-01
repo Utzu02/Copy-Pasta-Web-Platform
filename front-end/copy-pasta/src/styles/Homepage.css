@@ -1,6 +1,6 @@
 .homepageLogo {
-    margin-bottom: 3vh;
-    width: 25vw;
+    margin-bottom: 2dvh;
+    width: 25vmax;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,5 +8,5 @@
 
 .homepage {
     height: 100vh;
-    margin-left: 11vw;
+    margin-left: 11.5vw;
 }

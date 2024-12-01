@@ -5,8 +5,8 @@ import './../styles/AllStyles.css'
 
 const Recipes = () => {
     return (
-        <>
-        </>
+      <div className='main'>
+      </div>
       )
 }
 export default Recipes

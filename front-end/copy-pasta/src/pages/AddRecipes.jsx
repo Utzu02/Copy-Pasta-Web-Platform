@@ -5,8 +5,8 @@ import './../styles/AllStyles.css'
 
 const AddRecipes = () => {
     return (
-          <>
-          </>
+        <div className='main'>
+        </div>
       )
 }
 export default AddRecipes

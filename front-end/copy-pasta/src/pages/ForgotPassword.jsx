@@ -5,8 +5,8 @@ import './../styles/AllStyles.css'
 
 const ForgotPassword = () => {
     return (
-          <>
-          </>
+        <div className='main'>
+          </div>
       )
 }
 export default ForgotPassword

@@ -5,8 +5,8 @@ import './../styles/AllStyles.css'
 
 const Profile = () => {
     return (
-          <>
-          </>
+          <div className='main'>
+          </div>
       )
 }
 export default Profile

@@ -5,8 +5,8 @@ import './../styles/AllStyles.css'
 
 const Login = () => {
     return (
-          <>
-          </>
+        <div className='main'>
+        </div>
       )
 }
 export default Login
