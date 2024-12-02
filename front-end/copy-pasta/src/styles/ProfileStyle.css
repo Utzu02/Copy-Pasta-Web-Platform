@@ -8,7 +8,6 @@
     height: 90vh;
 }
 .profil.mobil {
-    padding-top: 4vh;
     flex-direction: column;
     height: 80vh;
     justify-content:initial;
@@ -47,7 +46,7 @@
     width: 48vw;
 }
 .nickname.mobil {
-    font-size: 13px !important;
+    font-size: 14px !important;
 }
 .content-nickname.informatii.mobil {
     width: 70vw;
@@ -103,7 +102,7 @@
     position: relative;
     padding: 1.5vh 10vw;
     border-radius: 15px; /* Colțuri rotunjite */
-    top: -5vh;
+    top: -10vh;
     left: 0;
     transform: translateX(0);
   }

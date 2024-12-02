@@ -3,8 +3,8 @@ import './NavStyle.css'
 import React from 'react';
 import { Link, Navigate, useLocation } from 'react-router-dom';
 
-const Navbar = ({isMobile}) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+const Navbar = ({isMobile,menuOpen,onToggleMenu}) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
   const checkToken = async () => {
     const token = localStorage.getItem('token');
@@ -13,15 +13,13 @@ const Navbar = ({isMobile}) => {
     setIsLoggedIn(true);
   }
 
-  const [menuOpen, setMenuOpen] = useState(false);
-
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen); // Inversăm starea meniului
+    onToggleMenu(!menuOpen); // Inversăm starea meniului
   };
 
   // Inchidem navigatia de pe mobil in momentul in care schimbam pagina
   useEffect(() => {
-    setMenuOpen(false); // Închide meniul
+    if(menuOpen) onToggleMenu(); // Închide meniul
   }, [location]);
   
 
@@ -59,7 +57,7 @@ const Navbar = ({isMobile}) => {
   const menuRef = useRef(null); // Referință la meniul mobil
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
-      setMenuOpen(false); // Închide meniul
+      onToggleMenu(); // Închide meniul
     }
   };
 
@@ -106,7 +104,7 @@ const Navbar = ({isMobile}) => {
             <path d="M9.75 11.7001L35.1 11.7001M9.75 19.5001H35.1M9.75 27.3001H35.1" stroke="black" stroke-width="1.5" stroke-linecap="round" />
           </svg>
         </button>
-        <div className='navLogo mobil'>
+        <div className={`navLogo mobil ${menuOpen&&'blur'} ${location.pathname === '/' &&'home'} ${location.pathname === '/add-recipe'&&'add-recipe'}`} >
           <Link to="/">
             <p className='logoText textalb'>
               chef

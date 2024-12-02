@@ -11,7 +11,7 @@ import ex2 from '../assets/ex2.png'
 import ex3 from '../assets/ex3.png'
 import Footer from '../components/Footer';
 import Carousel from '../components/Carousel';
-const Homepage = ({ isMobile }) => {
+const Homepage = ({menuOpen,isMobile }) => {
 
     const recipes = [
         {
@@ -74,11 +74,11 @@ const Homepage = ({ isMobile }) => {
             </>
         )
     else return (
-        <>
+        <div className={`${menuOpen&&'blur'}`}>
             <Carousel />
             <ContactFrom isMobile={isMobile} />
             <Footer isMobile={isMobile} />
-        </>
+        </div>
     )
 }
 export default Homepage

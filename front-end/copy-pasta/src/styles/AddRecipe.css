@@ -4,6 +4,22 @@
     transform: translateX(0%) !important;
     bottom: 0;
   }
+  #root {
+    min-height: 100vh;
+  }
+  .main.mobil {
+    min-height: 0;
+  }
+  .add-recipe-button.add.mobile {
+    font-size: 16px;
+    padding: 1vh 8vw;
+    border-radius: 15px;
+  }
+  .profil.mobile {
+    height: 54vh;
+    padding-top: 12vh;
+    align-items: baseline;
+  }
   .upload-button {
     display: flex;
     align-items: center;
@@ -18,6 +34,14 @@
     border-radius: 20px; /* Colțuri rotunjite */
     cursor: pointer;
     transition: all 0.3s ease; /* Efect de tranziție la hover */
+  }
+  .upload-button.mobil {
+    top: -2vh;
+    border-radius: 15px; /* Colțuri rotunjite */
+    position: relative;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 1.2vh 3.5vw; /* Spațiere interioară */
   }
   
   .upload-button:hover {
@@ -34,8 +58,15 @@
     padding-top: 3vh;
     width: 30vw;
   }
+  .informatiiBucatar.add.mobil {
+    width: 85vw;
+    height: 40vh;
+  }
   .content-nickname.informatii.add {
     width: 25vw;
+}
+.content-nickname.informatii.add.mobil {
+  width: 70vw;
 }
 @media screen and (max-width: 1400px) {
     .informatiiBucatar.add {

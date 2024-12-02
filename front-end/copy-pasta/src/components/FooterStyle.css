@@ -5,6 +5,7 @@ footer {
     margin-top: 5vh;
     position: relative;
     display: flex;
+    align-items: end;
 }
 .retele-media {
     position: absolute;

@@ -5,8 +5,9 @@ import './../styles/AllStyles.css'
 import '../styles/ProfileStyle.css'
 import Footer from '../components/Footer';
 
-const Profile = ({ isMobile }) => {
+const Profile = ({menuOpen,isMobile }) => {
     return (
+        <div className={`${menuOpen&&'blur'}`}>
         <div className='main'>
             <div className={`profil flex ${isMobile&&'mobil'}`}>
                 <div className={`numeBucatar ${isMobile&&'mobil'}`}>
@@ -78,6 +79,7 @@ const Profile = ({ isMobile }) => {
             Add a recipe
             </Link>
             {isMobile&&<Footer isMobile={isMobile}/>}
+        </div>
         </div>
     )
 }

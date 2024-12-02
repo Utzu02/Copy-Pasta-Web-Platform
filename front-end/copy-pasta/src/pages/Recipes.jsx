@@ -8,7 +8,7 @@ import ex2 from '../assets/ex2.png'
 import ex3 from '../assets/ex3.png'
 import linieorizontala from './../assets/linie-orizontala.svg'
 import Footer from '../components/Footer';
-const Recipes = () => {
+const Recipes = ({menuOpen, isMobile}) => {
 
   const recipes = [
     {
@@ -100,13 +100,13 @@ const Recipes = () => {
     },
   ];
   return (
-    <>
+    <div className={`${menuOpen&&'blur'}`}>
     <div className='main'>
       <div className='content'>
 
-        <div class="grid-container">
+        <div class={`grid-container ${isMobile&&'mobil'}`}>
           {recipes.map((recipe, index) => (
-            <div className='grid-item'>
+            <div className={`grid-item ${isMobile&&'mobil'}`}>
               <img src={recipe.image}></img>
               <img className="linieoriz" src={linieorizontala}></img>
               <div className='informatii recipe'>
@@ -118,7 +118,7 @@ const Recipes = () => {
                   {"☆".repeat(5 - recipe.ratings)}
                 </div>
                 <p className='informatiisuplimentare'>Nr ratinguri</p>
-                <p>{recipe.nrratinguri}</p>
+                <p className='nrratinguri'>{recipe.nrratinguri}</p>
                 <p className='informatiisuplimentare'>Author:</p>
                 <p className='autor recipe'>{recipe.author}</p>
               </div>
@@ -126,8 +126,9 @@ const Recipes = () => {
           ))}
         </div>
       </div>
+      <Footer isMobile={isMobile}/>
     </div>
-    </>
+    </div>
   )
 }
 export default Recipes

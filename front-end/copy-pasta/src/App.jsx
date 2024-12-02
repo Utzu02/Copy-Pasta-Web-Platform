@@ -14,13 +14,15 @@ import NotFound from './pages/NotFound';
 
 function App() {
   const [isMobile, setIsMobile] = useState(false);
-
+  const [menuOpen, setMenuOpen] = useState(false);
   // Actualizează starea în funcție de dimensiunea ecranului
+  const handleMenuToggle = (isOpen) => {
+    setMenuOpen(isOpen);
+  };
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-
     // Verificăm dimensiunea la montare
     handleResize();
 
@@ -35,15 +37,15 @@ function App() {
 
   return (
     <Router>
-      {<Navbar isMobile={isMobile}/>}
+      {<Navbar isMobile={isMobile} menuOpen={menuOpen} onToggleMenu={handleMenuToggle}/>}
       <Routes>
-        <Route path="/" element={<Home isMobile={isMobile}/>} />
-        <Route path="/recipes" element={<Recipes isMobile={isMobile}/>} />
-        <Route path="/profile" element={<Profile isMobile={isMobile}/>} />
+        <Route path="/" element={<Home menuOpen={menuOpen} isMobile={isMobile}/>} />
+        <Route path="/recipes" element={<Recipes menuOpen={menuOpen} isMobile={isMobile}/>} />
+        <Route path="/profile" element={<Profile menuOpen={menuOpen} isMobile={isMobile}/>} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/add-recipe" element={<AddRecipes isMobile={isMobile}/>} />
+        <Route path="/add-recipe" element={<AddRecipes menuOpen={menuOpen} isMobile={isMobile}/>} />
         <Route path="/not-found" element={<NotFound />} />
         <Route path="*" element={<Navigate to='/not-found' />} />
       </Routes>

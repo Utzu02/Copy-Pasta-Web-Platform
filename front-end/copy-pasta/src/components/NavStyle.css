@@ -185,5 +185,15 @@
     transform: translateX(-50%);
   }
   .navLogo.mobil a svg{
+    height: 6vh;
+  }
+  .navLogo.mobil.home a svg{
     height: 10vh;
+  }
+  .navLogo.mobil.add-recipe a svg {
+    padding-top: 5vh;
+    height: 11vh;
+  }
+  .blur {
+    filter: blur(1px);
   }

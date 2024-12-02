@@ -1,50 +1,82 @@
 .grid-container {
-    display: grid;
-    grid-template-rows: auto;
-    justify-items: center;
-    width: 90vw;
-    position: relative;
-    left: 50%;
-    grid-column-gap: 0vw;
-    grid-row-gap: 5vh;
-    padding-bottom: 10vh;
-    grid-template-columns: repeat(5, 1fr);
-    transform: translateX(-50%);
+  display: grid;
+  grid-template-rows: auto;
+  justify-items: center;
+  width: 90vw;
+  position: relative;
+  left: 50%;
+  grid-column-gap: 0vw;
+  grid-row-gap: 5vh;
+  padding-bottom: 10vh;
+  grid-template-columns: repeat(5, 1fr);
+  transform: translateX(-50%);
+}
+
+.grid-container.mobil {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-item.mobil {
+  width: 40vw;
+}
+
+.content {
+  padding-top: 20vh;
+}
+
+.grid-item {
+  background-color: #F8F8F8;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 15vw;
+  padding-bottom: 2vh;
+  filter: drop-shadow(6px 0px 4px rgba(0, 0, 0, 0.07));
+  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.linieoriz {
+  width: 100%;
+}
+
+.titlureteta.recipe {
+  padding-top: 2vh;
+}
+
+.autor.recipe {
+  width: 100%;
+  font-size: 23px;
+}
+
+.informatiisuplimentare.recipe {
+  font-size: 16px;
+}
+
+.informatii.recipe {
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+@media screen and (max-width: 1400px) {
+  .grid-container {
+    grid-template-columns: repeat(4, 1fr);
   }
-  @media screen and (max-width: 1400px){
-    .grid-container {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-  .grid-item {
-    background-color: rgba(255, 255, 255, 0.8);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    width: 15vw;
-    padding-bottom: 2vh;
-    filter: drop-shadow(6px 0px 4px rgba(0, 0, 0, 0.07));
-    font-size: 30px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-  }
+}
+@media screen and (max-width: 760px) {
   .content {
-    padding-top: 20vh;
-  }
-  .linieoriz {
-    width: 100%;
-  }
-  .titlureteta.recipe {
-    padding-top: 2vh;
+    padding-top: 0vh;
   }
   .autor.recipe {
-    width: 100%;
-    font-size: 23px;
+    font-size: 13px;
   }
-  .informatiisuplimentare.recipe {
-    font-size: 16px;
+  .informatiisuplimentare {
+    font-size: 14px;
   }
-  .informatii.recipe {
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
+  .nrratinguri {
+    font-size: 14px;
   }
+  .stars {
+    font-size: 1.7rem;
+  }
+}
