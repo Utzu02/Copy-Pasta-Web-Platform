@@ -1,0 +1,50 @@
+.add-recipe-button.add {
+    position: relative !important;
+    left: 0%;
+    transform: translateX(0%) !important;
+    bottom: 0;
+  }
+  .upload-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: 2px solid white; /* Contur alb */
+    color: white; /* Text și icon alb */
+    font-family: 'Montserrat', sans-serif; /* Font modern */
+    font-size: 16px;
+    font-weight: 600;
+    padding: 1.2vh 1.5vw; /* Spațiere interioară */
+    border-radius: 20px; /* Colțuri rotunjite */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Efect de tranziție la hover */
+  }
+  
+  .upload-button:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Fundal subtil la hover */
+  }
+  
+  .upload-icon {
+    width: 20px; /* Dimensiunea iconului */
+    height: 20px;
+    margin-right: 8px; /* Spațiere între icon și text */
+  }
+  .informatiiBucatar.add {
+    justify-content: space-evenly;
+    padding-top: 3vh;
+    width: 30vw;
+  }
+  .content-nickname.informatii.add {
+    width: 25vw;
+}
+@media screen and (max-width: 1400px) {
+    .informatiiBucatar.add {
+        width: 40vw;
+      }
+      .content-nickname.informatii.add {
+        width: 35vw;
+      }
+      .add-recipe-button.add {
+        font-size: 20px;
+      }
+}

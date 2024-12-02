@@ -39,7 +39,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home isMobile={isMobile}/>} />
         <Route path="/recipes" element={<Recipes />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<Profile isMobile={isMobile}/>} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
