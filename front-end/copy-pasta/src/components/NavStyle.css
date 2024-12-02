@@ -116,7 +116,7 @@
     bottom: 0 !important;
     top:0 !important;
     background-color: rgba(255, 255, 255, 0.488);
-    backdrop-filter: blur(1px);
+    /*backdrop-filter: blur(1px);*/
     height: 100vh;
     left: 0;
     padding-top: 6vh;
