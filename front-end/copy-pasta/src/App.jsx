@@ -38,12 +38,12 @@ function App() {
       {<Navbar isMobile={isMobile}/>}
       <Routes>
         <Route path="/" element={<Home isMobile={isMobile}/>} />
-        <Route path="/recipes" element={<Recipes />} />
+        <Route path="/recipes" element={<Recipes isMobile={isMobile}/>} />
         <Route path="/profile" element={<Profile isMobile={isMobile}/>} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/add-recipe" element={<AddRecipes />} />
+        <Route path="/add-recipe" element={<AddRecipes isMobile={isMobile}/>} />
         <Route path="/not-found" element={<NotFound />} />
         <Route path="*" element={<Navigate to='/not-found' />} />
       </Routes>

@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 import './../styles/AllStyles.css'
 import '../styles/ProfileStyle.css'
 import '../styles/AddRecipe.css'
+import Footer from '../components/Footer';
 
 const AddRecipes = ({ isMobile }) => {
     return (
+        <>
         <div className='main'>
             <div className='profil flex'>
                 <div className='informatiiBucatar add flex'>
@@ -37,7 +39,9 @@ const AddRecipes = ({ isMobile }) => {
 
                 </div>
             </div>
+        {isMobile&&<Footer isMobile={isMobile} />}
         </div>
+        </>
     )
 }
 export default AddRecipes

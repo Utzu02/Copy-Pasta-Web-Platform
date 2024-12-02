@@ -3,13 +3,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './../styles/AllStyles.css'
 import '../styles/ProfileStyle.css'
+import Footer from '../components/Footer';
 
 const Profile = ({ isMobile }) => {
     return (
         <div className='main'>
-            <div className='profil flex'>
-                <div className='numeBucatar'>
-                    <svg width="108" height="203" viewBox="0 0 108 203" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div className={`profil flex ${isMobile&&'mobil'}`}>
+                <div className={`numeBucatar ${isMobile&&'mobil'}`}>
+                    <svg
+        preserveAspectRatio="xMidYMid meet" className={`svgbucatar ${isMobile&&'mobil'}`}
+        viewBox="0 0 108 203" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_161_101)">
                             <path d="M81.8948 120.009H76.3774C80.9529 114.677 83.7473 107.721 83.7473 100.093V82.3684C86.5104 82.1383 88.6978 79.8331 88.6978 77.0002C88.6978 74.4649 86.9434 72.3447 84.5954 71.7628V57.043C96.0855 55.64 105.027 45.6524 105.027 33.5582C105.027 20.5075 94.6169 9.88836 81.8189 9.88836C80.0065 9.88836 78.2522 10.0959 76.5872 10.5064C70.9001 3.81189 62.749 0 54.0355 0C45.3219 0 37.3181 3.71716 31.6355 10.2402C30.1847 10.0011 28.9036 9.88836 27.6671 9.88836C14.869 9.88836 4.45919 20.5075 4.45919 33.5582C4.45919 45.1246 12.6416 54.7604 23.4085 56.8084V71.7582C21.0739 72.3357 19.3821 74.4198 19.3821 77.0002C19.3821 79.9053 21.5292 82.1834 24.3325 82.3774V100.097C24.3325 107.721 27.127 114.681 31.7025 120.014H26.1895C11.7532 120.014 0.00866699 131.991 0.00866699 146.715V201.2C0.00866699 202.197 0.807708 203.005 1.79423 203.005C2.78076 203.005 3.5798 202.197 3.5798 201.2V146.715C3.5798 133.98 13.7218 123.622 26.1895 123.622H35.3495C40.4607 127.858 46.9646 130.407 54.0444 130.407C61.1242 130.407 67.6325 127.858 72.7437 123.622H81.9037C94.3312 123.622 104.438 133.985 104.438 146.715V201.2C104.438 202.197 105.237 203.005 106.223 203.005C107.21 203.005 108.009 202.197 108.009 201.2V146.715C108.009 131.991 96.2953 120.014 81.9037 120.014L81.8948 120.009ZM8.02586 33.5582C8.02586 22.4969 16.8376 13.4972 27.6626 13.4972C28.9527 13.4972 30.3276 13.6461 31.9926 13.9709C32.6354 14.0882 33.2916 13.8536 33.7068 13.3439C38.7331 7.15913 46.1432 3.6134 54.0355 3.6134C61.9277 3.6134 69.5252 7.28544 74.5561 13.6822C75.0159 14.2641 75.7881 14.4987 76.4845 14.2822C78.1451 13.7634 79.9396 13.4972 81.8278 13.4972C92.6528 13.4972 101.465 22.4969 101.465 33.5582C101.465 44.6194 92.6528 53.6191 81.8278 53.6191C78.462 53.6191 75.2792 52.798 72.3688 51.174C71.7349 50.8222 70.9537 50.8898 70.3868 51.3455C65.7086 55.1393 59.901 57.228 54.0399 57.228C48.1788 57.228 42.7998 55.3604 38.2287 51.8282C37.9877 51.6432 37.7109 51.5485 37.4252 51.5034C37.3717 51.4943 37.327 51.4808 37.2734 51.4763C37.2288 51.4763 37.1886 51.4537 37.1485 51.4537C36.8895 51.4537 36.6306 51.5124 36.3896 51.6252C33.5952 52.9469 30.6624 53.6191 27.6716 53.6191C16.8466 53.6191 8.03479 44.6194 8.03479 33.5582H8.02586ZM27.6626 57.228C28.1224 57.228 28.5777 57.1874 29.0331 57.1603C29.2384 57.1468 29.4482 57.1468 29.6535 57.1287C30.3499 57.0701 31.0463 56.9708 31.7337 56.849C31.8587 56.8265 31.9837 56.8174 32.1087 56.7904C32.7827 56.6596 33.4479 56.4881 34.113 56.2987C34.2558 56.2581 34.4031 56.231 34.5505 56.1859C35.345 55.9423 36.1351 55.6626 36.9119 55.3333C41.9293 58.9377 47.8261 60.8368 54.031 60.8368C60.2358 60.8368 66.5389 58.7302 71.6813 54.8867C72.4446 55.2611 73.2214 55.5859 74.0115 55.8746C74.2659 55.9648 74.5293 56.028 74.7882 56.1137C75.3283 56.2851 75.8685 56.4611 76.4175 56.5919C76.7389 56.6686 77.0693 56.7182 77.3951 56.7814C77.8906 56.8761 78.3906 56.9753 78.895 57.0385C79.2521 57.0836 79.6182 57.1016 79.9797 57.1287C80.3279 57.1558 80.6716 57.2054 81.0243 57.2189V71.5913H26.9752V57.228C27.1046 57.228 27.2296 57.2144 27.3591 57.2144C27.4618 57.2144 27.56 57.2325 27.6671 57.2325L27.6626 57.228ZM22.9443 77.0002C22.9443 75.9716 23.6987 75.1957 24.6941 75.1957H83.3054C84.3276 75.1957 85.1266 75.9897 85.1266 77.0002C85.1266 78.0106 84.3231 78.8046 83.3054 78.8046H24.6941C23.6987 78.8046 22.9443 78.0287 22.9443 77.0002ZM37.2913 120.573C37.2645 120.546 37.2422 120.528 37.2154 120.501C31.5239 115.597 27.8948 108.276 27.8948 100.093V82.4135H80.1806V100.093C80.1806 108.176 76.6318 115.417 71.0564 120.316C70.8823 120.429 70.735 120.559 70.61 120.722C66.0969 124.511 60.3251 126.789 54.0399 126.789C47.7547 126.789 41.8356 124.448 37.2958 120.568L37.2913 120.573Z" fill="white" />
                             <path d="M80.971 129.537C79.9845 129.537 79.1854 130.344 79.1854 131.341V187.847C79.1854 188.844 79.9845 189.652 80.971 189.652C81.9575 189.652 82.7566 188.844 82.7566 187.847V131.341C82.7566 130.344 81.9575 129.537 80.971 129.537Z" fill="white" />
@@ -30,38 +33,51 @@ const Profile = ({ isMobile }) => {
                         </defs>
                     </svg>
 
-                    <div className='content-nickname'>
-                        <p className='nickname'>Gogu bucatar</p>
+                    {!isMobile&&<div className={`content-nickname ${isMobile&&'mobil'}`}>
+                        <p className={`nickname ${isMobile&&'mobil'}`}>Gogu bucatar</p>
                         <svg width="100%" height="1" viewBox="0 0 412 1" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                             <line y1="0.5" x2="412" y2="0.5" stroke="white" />
                         </svg>
-                    </div>
+                    </div>}
+                    {isMobile&&<div className={`content-nickname ${isMobile&&'mobil'}`}>
+                        <p className={`nickname ${isMobile&&'mobil'}`}>First name:</p>
+                        <svg width="100%" height="1" viewBox="0 0 412 1" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                            <line y1="0.5" x2="412" y2="0.5" stroke="white" />
+                        </svg>
+                    </div>}
+                    {isMobile&&<div className={`content-nickname ${isMobile&&'mobil'}`}>
+                        <p className={`nickname ${isMobile&&'mobil'}`}>Last name:</p>
+                        <svg width="100%" height="1" viewBox="0 0 412 1" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                            <line y1="0.5" x2="412" y2="0.5" stroke="white" />
+                        </svg>
+                    </div>}
                 </div>
-                <div className='informatiiBucatar flex'>
-                    <div className='content-nickname informatii'>
-                        <p className='nickname'>Email: </p>
+                <div className={`informatiiBucatar flex ${isMobile&&'mobil'}`}>
+                    <div className={`content-nickname informatii ${isMobile&&'mobil'}`}>
+                        <p className={`nickname ${isMobile&&'mobil'}`}>Email: </p>
                         <svg width="100%" height="1" viewBox="0 0 412 1" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                             <line y1="0.5" x2="412" y2="0.5" stroke="white" />
                         </svg>
                     </div>
-                    <div className='content-nickname informatii'>
-                        <p className='nickname'>Telephone: </p>
+                    <div className={`content-nickname informatii ${isMobile&&'mobil'}`}>
+                        <p className={`nickname ${isMobile&&'mobil'}`}>Telephone: </p>
                         <svg width="100%" height="1" viewBox="0 0 412 1" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                             <line y1="0.5" x2="412" y2="0.5" stroke="white" />
                         </svg>
 
                     </div>
-                    <div className='content-nickname informatii'>
-                        <p className='nickname'>College group:</p>
+                    <div className={`content-nickname informatii ${isMobile&&'mobil'}`}>
+                        <p className={`nickname ${isMobile&&'mobil'}`}>College group:</p>
                         <svg width="100%" height="1" viewBox="0 0 412 1" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                             <line y1="0.5" x2="412" y2="0.5" stroke="white" />
                         </svg>
                     </div>
                 </div>
             </div>
-            <Link to="/add-recipe" className="add-recipe-button">
+            <Link to="/add-recipe" className={`add-recipe-button ${isMobile&&'mobil'}`}>
             Add a recipe
             </Link>
+            {isMobile&&<Footer isMobile={isMobile}/>}
         </div>
     )
 }

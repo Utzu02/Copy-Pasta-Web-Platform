@@ -7,6 +7,7 @@ import ex1 from '../assets/ex1.png'
 import ex2 from '../assets/ex2.png'
 import ex3 from '../assets/ex3.png'
 import linieorizontala from './../assets/linie-orizontala.svg'
+import Footer from '../components/Footer';
 const Recipes = () => {
 
   const recipes = [
@@ -99,6 +100,7 @@ const Recipes = () => {
     },
   ];
   return (
+    <>
     <div className='main'>
       <div className='content'>
 
@@ -125,6 +127,7 @@ const Recipes = () => {
         </div>
       </div>
     </div>
+    </>
   )
 }
 export default Recipes
