@@ -30,7 +30,7 @@ const Homepage = ({ isMobile }) => {
         },
         {
             title: "Reteta 3",
-            image: ex2,
+            image: ex1,
             author: "Prenume Nume",
             ratings: 5,
             nrratinguri: 514,
@@ -50,7 +50,7 @@ const Homepage = ({ isMobile }) => {
                     <div className='items flex'>
                         {recipes.map((recipe, index) => (
                             <div className='item flex'>
-                                <img src={ex1}></img>
+                                <img src={recipe.image}></img>
                                 <img className="linie" src={linie}></img>
                                 <div className='informatii'>
                                     <p className='titlureteta'>

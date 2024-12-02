@@ -19,7 +19,11 @@ const Navbar = ({isMobile}) => {
     setMenuOpen(!menuOpen); // Inversăm starea meniului
   };
 
-
+  // Inchidem navigatia de pe mobil in momentul in care schimbam pagina
+  useEffect(() => {
+    setMenuOpen(false); // Închide meniul
+  }, [location]);
+  
 
   const optiuniConfigurari = () => {
     if (location.pathname === '/profile' && isLoggedIn) {
@@ -121,17 +125,26 @@ const Navbar = ({isMobile}) => {
         <ul>
           <li><Link to='/'>Home</Link></li>
           <li><Link to='/recipes'>Recipes</Link></li>
-          <li><Link to="/add-recipe">Add recipes</Link></li>
+          {isLoggedIn&&<li><Link to="/add-recipe">Add recipes</Link></li>}
           <div className='optiuniMobil flex column'>
-            <li>
-              <Link to="/login" className='textSectiuni mobilfixchenar'>
+            {isLoggedIn&&<li>
+              <Link to="/profile" className='textSectiuni mobilfixchenar'>
                 <svg className='loginSVG' width="62" height="31" viewBox="0 0 124 52" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect opacity="0.85" x="1.5" y="1.5" width="121" height="49" rx="19.5" stroke="black" stroke-width="3" />
                 </svg>
                 <p className='textLoginMobil'>Profile</p>
               </Link>
-            </li>
-            <li><Link to="/logout">Logout</Link></li>
+            </li>}
+            {isLoggedIn&&<li><Link to="/logout">Logout</Link></li>}
+            {!isLoggedIn&&<li>
+              {!isLoggedIn&&<li><Link to="/login">Login</Link></li>}
+              <Link to="/register" className='textSectiuni mobilfixchenar'>
+                <svg className='loginSVG' width="62" height="31" viewBox="0 0 124 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect opacity="0.85" x="1.5" y="1.5" width="121" height="49" rx="19.5" stroke="black" stroke-width="3" />
+                </svg>
+                <p className='textLoginMobil'>Register</p>
+              </Link>
+            </li>}
           </div>
         </ul>
       </nav>
