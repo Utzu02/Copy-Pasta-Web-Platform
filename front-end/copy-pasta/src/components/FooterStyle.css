@@ -2,6 +2,7 @@ footer svg {
     display: block;
 }
 footer {
+    margin-top: 5vh;
     position: relative;
     display: flex;
 }

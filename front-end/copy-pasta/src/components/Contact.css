@@ -79,6 +79,8 @@
   }
   .submit-btn.mobil {
     position: relative;
+    width: 35vw;
+    font-size: 15px;
   }
   /* Hover pe buton */
   .submit-btn:hover {
@@ -86,12 +88,13 @@
   }
   .form-group.mobil input{
     font-size: 17px;
-    width: 50vw !important;
+    width: 60vw !important;
+    height: 1vh;
   }
   .form-group.mobil textarea {
-    width: 50vw !important;
+    width: 60vw !important;
     font-size: 17px;
-    height: 14vh !important;
+    height: 13vh !important;
   }
   .contact.mobil {
     display: flex;
@@ -101,4 +104,7 @@
   }
   .contact.mobil h2 {
     font-size: 35px;
+  }
+  .nrrating {
+    font-size: 12px;
   }

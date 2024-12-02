@@ -119,9 +119,9 @@ const Navbar = ({isMobile}) => {
       </div>
       <nav ref={menuRef} className={`mobile-menu ${menuOpen ? "open" : "hidden"}`}>
         <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#recipes">Recipes</a></li>
-          <li><a href="#add-recipes">Add recipes</a></li>
+          <li><Link to='/'>Home</Link></li>
+          <li><Link to='/recipes'>Recipes</Link></li>
+          <li><Link to="/add-recipe">Add recipes</Link></li>
           <div className='optiuniMobil flex column'>
             <li>
               <Link to="/login" className='textSectiuni mobilfixchenar'>
@@ -131,7 +131,7 @@ const Navbar = ({isMobile}) => {
                 <p className='textLoginMobil'>Profile</p>
               </Link>
             </li>
-            <li><a href="#">Logout</a></li>
+            <li><Link to="/logout">Logout</Link></li>
           </div>
         </ul>
       </nav>
