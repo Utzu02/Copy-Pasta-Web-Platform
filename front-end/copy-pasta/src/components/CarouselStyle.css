@@ -3,7 +3,7 @@
     width: 100vw;
     margin: 0 auto;
     background-color: #00236d;
-    height: 32vh;
+    height: 38vh;
     text-align: center;
   }
   
@@ -32,7 +32,7 @@
   }
   
   .item.carousel-item{
-    height: 17vh;
+    height: 23vh;
     display: none;
     justify-content: center;
     align-items: center;
@@ -88,12 +88,17 @@
     color: white;
   }
   .autor {
-    font-size: 12px;
+    font-size: 11px;
   }
   .informatiisuplimentare{
-    font-size: 13px;
+    font-size: 12px;
   }
   .informatii {
     padding-left: 3.5vw;
     padding-right: 3.5vw;
+  }
+  .titlureteta {
+    padding-top: 1vh;
+    font-size: 15px;
+    margin-bottom: -1vh;
   }

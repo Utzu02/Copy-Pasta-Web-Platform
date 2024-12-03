@@ -42,9 +42,9 @@ function App() {
         <Route path="/" element={<Home menuOpen={menuOpen} isMobile={isMobile}/>} />
         <Route path="/recipes" element={<Recipes menuOpen={menuOpen} isMobile={isMobile}/>} />
         <Route path="/profile" element={<Profile menuOpen={menuOpen} isMobile={isMobile}/>} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/register" element={<Register menuOpen={menuOpen} isMobile={isMobile}/>} />
+        <Route path="/login" element={<Login menuOpen={menuOpen} isMobile={isMobile}/>} />
+        <Route path="/forgot-password" element={<ForgotPassword menuOpen={menuOpen} isMobile={isMobile}/>} />
         <Route path="/add-recipe" element={<AddRecipes menuOpen={menuOpen} isMobile={isMobile}/>} />
         <Route path="/not-found" element={<NotFound />} />
         <Route path="*" element={<Navigate to='/not-found' />} />

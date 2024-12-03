@@ -39,17 +39,17 @@ const Login = ({ menuOpen, isMobile }) => {
   return (
     <div className={`${menuOpen && 'blur'}`}>
       <div className={`main ${isMobile && 'mobil'}`}>
-        <div className={`profil ${isMobile && 'mobile'} flex`}>
+        <div className={`profil ${isMobile && 'loginmobile'} flex`}>
           <form
-            className={`informatiiBucatar add ${isMobile && 'mobil'} login flex`}
+            className={`informatiiBucatar add ${isMobile && 'loginmobile'} login flex`}
             onSubmit={handleSubmit}
           >
-            <h2 className="loginText">
+            <h2 className={`loginText ${isMobile&&'loginmobile'}`}>
               Loghează-te,<br /> chiorăie mațele!
             </h2>
 
             {/* Input pentru email */}
-            <div className={`content-nickname informatii ${isMobile && 'mobil'} add`}>
+            <div className={`content-nickname informatii ${isMobile && 'loginmobile'} add`}>
               <input
                 type="email"
                 placeholder="Email"
@@ -71,7 +71,7 @@ const Login = ({ menuOpen, isMobile }) => {
             </div>
 
             {/* Input pentru password */}
-            <div className={`content-nickname informatii ${isMobile && 'mobil'} add`}>
+            <div className={`content-nickname informatii ${isMobile && 'loginmobile'} add`}>
               <input
                 type="password"
                 placeholder="Password"
@@ -101,7 +101,7 @@ const Login = ({ menuOpen, isMobile }) => {
             </button>
 
             {/* Link Forgot Password */}
-            <Link to="/forgot-password" className="forgot-password">
+            <Link to="/forgot-password" className={`forgot-password ${isMobile && 'mobilelogin'}`}>
               Forgot password
             </Link>
           </form>

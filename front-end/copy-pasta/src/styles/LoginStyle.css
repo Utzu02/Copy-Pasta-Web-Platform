@@ -52,3 +52,25 @@
     margin-top: 5px;
     text-align: left;
 }
+
+.profil.loginmobile {
+    height: auto;
+    padding-top: 0;
+}
+.informatiiBucatar.add.loginmobile {
+    width: 70vw;
+    height: 40vh;
+}
+.content-nickname.informatii.loginmobile {
+    width: 60vw;
+}
+.loginText.loginmobile {
+    font-size: 20px;
+}
+.forgot-password.mobilelogin {
+    font-size: 14px;
+}
+.loginmobile input{
+    position: relative;
+    margin-bottom:0vh;
+}
