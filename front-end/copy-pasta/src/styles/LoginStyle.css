@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.loginText {
+    color: white;
+    font-size: 36px;
+    font-weight: 700;
+    padding-bottom: 2vh;
+}
+.informatiiBucatar.add.register {
+    margin-top: 20vh;
+    height: 70vh;
+}
+.forgot-password {
+    text-decoration: underline;
+    color: white;
+    font-size: 18px;
+    top: 0vh;
+    position: relative;
+}
+.informatiiBucatar.add.login {
+    margin-top: 5vh;
+    height: 55vh;
+}
+.add-recipe-button.login.add {
+    padding: .5vh 4vw;
+
+}
+.add-recipe-button.login.add.signup {
+    margin-bottom: 5vh;
+    margin-top: 5vh;
+}
+.content-nickname.informatii input {
+    background-color: #00236D;
+    border: 0;
+    width: 100%;
+}
+.content-nickname.informatii input:focus {
+    border: 0;
+}
+.content-nickname.informatii input::placeholder {
+    color: white;
+}
+
+.input-error {
+    border: 2px solid red;
+}
+
+.error {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    text-align: left;
+}

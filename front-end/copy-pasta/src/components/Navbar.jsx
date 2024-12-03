@@ -4,7 +4,7 @@ import React from 'react';
 import { Link, Navigate, useLocation } from 'react-router-dom';
 
 const Navbar = ({isMobile,menuOpen,onToggleMenu}) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const location = useLocation();
   const checkToken = async () => {
     const token = localStorage.getItem('token');
@@ -21,6 +21,8 @@ const Navbar = ({isMobile,menuOpen,onToggleMenu}) => {
   useEffect(() => {
     if(menuOpen) onToggleMenu(); // Închide meniul
   }, [location]);
+
+
   
 
   const optiuniConfigurari = () => {
