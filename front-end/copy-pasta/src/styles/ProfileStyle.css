@@ -53,13 +53,16 @@
 }
 .nickname {
     font-size: 24px;
-    margin-bottom: -1.5vh;
     text-align: left;
     color: white;
 }
 .content-nickname {
     width: 20vw;
     padding: 0;
+    display: flex;
+    gap: .8vh;
+    justify-content: center;
+    flex-direction: column;
 }
 .informatiiBucatar {
     background: #00236D;

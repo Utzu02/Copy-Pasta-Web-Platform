@@ -62,7 +62,7 @@ const Register = ({ menuOpen, isMobile }) => {
             className={`informatiiBucatar add ${isMobile && 'mobil'} register flex`}
             onSubmit={handleSubmit}
           >
-            <h2 className="loginText">Hai, fă foamea cu noi!</h2>
+            <h2 className={`loginText ${isMobile&&'loginmobile'} `}>Hai, fă foamea cu noi!</h2>
 
             {/* Full Name */}
             <div className={`content-nickname informatii ${isMobile && 'mobil'} add`}>

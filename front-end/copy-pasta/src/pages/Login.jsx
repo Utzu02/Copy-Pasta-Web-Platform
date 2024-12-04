@@ -106,8 +106,8 @@ const Login = ({ menuOpen, isMobile }) => {
             </Link>
           </form>
         </div>
-        {isMobile && <Footer isMobile={isMobile} />}
       </div>
+      {isMobile && <Footer isMobile={isMobile} />}
     </div>
   );
 };

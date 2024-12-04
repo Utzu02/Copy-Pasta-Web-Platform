@@ -4,7 +4,7 @@ import React from 'react';
 import { Link, Navigate, useLocation } from 'react-router-dom';
 
 const Navbar = ({isMobile,menuOpen,onToggleMenu}) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
   const checkToken = async () => {
     const token = localStorage.getItem('token');
