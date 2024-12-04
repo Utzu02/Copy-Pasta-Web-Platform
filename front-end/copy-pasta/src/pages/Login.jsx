@@ -6,6 +6,7 @@ import '../styles/ProfileStyle.css';
 import '../styles/AddRecipe.css';
 import '../styles/LoginStyle.css';
 import Footer from '../components/Footer';
+import Cookies from 'js-cookie';
 
 const Login = ({ menuOpen, isMobile }) => {
   const [email, setEmail] = useState('');
@@ -41,6 +42,7 @@ const Login = ({ menuOpen, isMobile }) => {
       // Verifici dacă răspunsul este OK (status 200)
       if (response.ok) {
         const data = await response.json(); // Răspunsul de la server
+        Cookies.set('UID',data.userId, { expires: 7, path: '' });
         setMessage(data.message || 'Autentificare reușită!');
         setEmail('');
         setPassword('');

@@ -1,24 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './../styles/AllStyles.css';
 import '../styles/RecipesStyle.css';
-import ex1 from '../assets/ex1.png';
-import ex2 from '../assets/ex2.png';
-import ex3 from '../assets/ex3.png';
 import linieorizontala from './../assets/linie-orizontala.svg';
 import Footer from '../components/Footer';
 
 const Recipes = ({ menuOpen, isMobile }) => {
 
+  const [recipes, setRecipes] = useState([]); // State pentru rețete
+  const [filteredRecipes, setFilteredRecipes] = useState([]); // Rețete filtrate
   const [searchQuery, setSearchQuery] = useState("");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const [sortOption, setSortOption] = useState(''); // Pentru selectarea opțiunii de sortare
 
   // Schimbăm valoarea în input
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
-    console.log(e.target.value)
   };
 
   const toggleFilterDropdown = () => {
@@ -55,104 +53,77 @@ const Recipes = ({ menuOpen, isMobile }) => {
     const newCheckboxes = [...checkboxes];
     newCheckboxes[index] = !newCheckboxes[index];
     setCheckboxes(newCheckboxes);
-    console.log(newCheckboxes)
   };
 
   const startOptions = [{}, {}, {}, {}, {}];
-  const recipes = [
-    {
-      title: "Reteta 1",
-      image: ex1, // Imaginea poate fi schimbată cu o cale validă
-      author: "Prenume Nume",
-      ratings: 5,
-      nrratinguri: 194,
-    },
-    {
-      title: "Reteta 2",
-      image: ex2,
-      author: "Prenume Nume",
-      ratings: 4,
-      nrratinguri: 434,
-    },
-    {
-      title: "Reteta 3",
-      image: ex1,
-      author: "Prenume Nume",
-      ratings: 5,
-      nrratinguri: 514,
-    }, {
-      title: "Reteta 3",
-      image: ex1,
-      author: "Prenume Nume",
-      ratings: 5,
-      nrratinguri: 514,
-    }, {
-      title: "Reteta 3",
-      image: ex1,
-      author: "Prenume Nume",
-      ratings: 5,
-      nrratinguri: 514,
-    }, {
-      title: "Reteta 3",
-      image: ex1,
-      author: "Prenume Nume",
-      ratings: 5,
-      nrratinguri: 514,
-    }, {
-      title: "Reteta 3",
-      image: ex1,
-      author: "Prenume Nume",
-      ratings: 5,
-      nrratinguri: 514,
-    }, {
-      title: "Reteta 3",
-      image: ex1,
-      author: "Prenume Nume",
-      ratings: 5,
-      nrratinguri: 514,
-    }, {
-      title: "Reteta 3",
-      image: ex1,
-      author: "Prenume Nume",
-      ratings: 5,
-      nrratinguri: 514,
-    }, {
-      title: "Reteta 3",
-      image: ex1,
-      author: "Prenume Nume",
-      ratings: 5,
-      nrratinguri: 514,
-    }, {
-      title: "Reteta 3",
-      image: ex1,
-      author: "Prenume Nume",
-      ratings: 5,
-      nrratinguri: 514,
-    }, {
-      title: "Reteta 3",
-      image: ex1,
-      author: "Prenume Nume",
-      ratings: 5,
-      nrratinguri: 514,
-    }, {
-      title: "Reteta 3",
-      image: ex1,
-      author: "Prenume Nume",
-      ratings: 5,
-      nrratinguri: 514,
-    }, {
-      title: "Reteta 3",
-      image: ex1,
-      author: "Prenume Nume",
-      ratings: 5,
-      nrratinguri: 514,
-    },
-  ];
 
-  // Funcții pentru sortare
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/get-recipes');
+        const data = await response.json();
+        setRecipes(data); // Stochează rețetele în state
+        setFilteredRecipes(data); // Inițial, setăm toate rețetele
+      } catch (error) {
+        console.error('Eroare la preluarea rețetelor:', error);
+      }
+    };
+    fetchRecipes();
+  }, []); // Array de dependențe gol => se execută o singură dată, la montarea componentei
+
+
+  // Funcția de filtrare
+  const filterRecipesByRating = () => {
+    let filtered = [...recipes]; // Facem o copie a rețetelor
+
+    // Dacă niciun checkbox nu este selectat, afișăm toate rețetele
+    if (!checkboxes.some(isChecked => isChecked)) {
+      setFilteredRecipes(recipes);
+      return;
+    }
+
+    // Reuniunea filtrează rețetele care au ratingurile selectate
+    filtered = filtered.filter(recipe => 
+      checkboxes.some((isChecked, index) => isChecked && recipe.ratings === 5-index)
+    );
+
+    setFilteredRecipes(filtered); // Setăm rețetele filtrate
+  };
+
+  // Folosim un useEffect pentru a filtra rețetele de fiecare dată când checkbox-urile se schimbă
+  useEffect(() => {
+    filterRecipesByRating();
+  }, [checkboxes, recipes]); // Se reexecută la schimbarea checkbox-urilor sau a listei de rețete
+
+  // Funcția pentru sortare
+  const sortRecipes = (option) => {
+    let sorted = [...filteredRecipes]; // Facem o copie a rețetelor filtrate
+
+    switch (option) {
+      case 'Top rated':
+        sorted = sorted.sort((a, b) => b.ratings - a.ratings);
+        break;
+      case 'Worst rated':
+        sorted = sorted.sort((a, b) => a.ratings - b.ratings);
+        break;
+      case 'Most rated':
+        sorted = sorted.sort((a, b) => b.nrratinguri - a.nrratinguri);
+        break;
+      case 'Least rated':
+        sorted = sorted.sort((a, b) => a.nrratinguri - b.nrratinguri);
+        break;
+      default:
+        break;
+    }
+
+    setFilteredRecipes(sorted); // Setăm rețetele sortate
+  };
+
+  // Funcția care se apelează când se alege o opțiune de sortare
   const handleSortSelection = (option) => {
-    console.log(`Sortare aleasă: ${option}`);
+    setSortOption(option); // Setăm opțiunea de sortare selectată
     setIsSortOpen(false);  // Închide dropdown-ul după selecție
+    sortRecipes(option); // Apelăm funcția de sortare
   };
 
   return (
@@ -191,12 +162,12 @@ const Recipes = ({ menuOpen, isMobile }) => {
                   {startOptions.map((star, index) => (
                     <>
                       <div className='flex'>
-                        <input type="checkbox" id={`start${5 - index - 1}`}
-                          checked={checkboxes[5 - index - 1]}
-                          onChange={() => handleCheckboxChange(5 - index - 1)} />
-                        <label for={`start${5 - index - 1}`}>
+                        <input type="checkbox" id={`start${index}`}
+                          checked={checkboxes[index]}
+                          onChange={() => handleCheckboxChange(index)} />
+                        <label for={`start${index}`}>
                           <p key={index} className='stars filter'>
-                            {"★".repeat(5 - index)}
+                            {"★".repeat(5-index)}
                             {"☆".repeat(index)}
                           </p>
                         </label>
@@ -232,9 +203,9 @@ const Recipes = ({ menuOpen, isMobile }) => {
           </div>
 
           <div className={`grid-container ${isMobile && 'mobil'}`}>
-            {recipes.map((recipe, index) => (
+            {filteredRecipes.map((recipe, index) => (
               <div className={`grid-item ${isMobile && 'mobil'}`} key={index}>
-                <img src={recipe.image} alt="recipe" />
+                <img src={`http://localhost:5000${recipe.image}`} alt="recipe" />
                 <img className="linieoriz" src={linieorizontala} alt="linie"></img>
                 <div className='informatii recipe'>
                   <p className='titlureteta recipe'>

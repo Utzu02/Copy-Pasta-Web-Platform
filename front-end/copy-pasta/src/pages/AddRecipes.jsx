@@ -6,7 +6,7 @@ import '../styles/ProfileStyle.css';
 import '../styles/AddRecipe.css';
 import Footer from '../components/Footer';
 
-const AddRecipes = ({ menuOpen, isMobile }) => {
+const AddRecipes = ({ menuOpen, isMobile,UID }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState(null);  // Stocăm fișierul separat

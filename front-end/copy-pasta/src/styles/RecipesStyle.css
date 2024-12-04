@@ -4,6 +4,7 @@
   justify-items: center;
   width: 90vw;
   position: relative;
+  min-height: 50vh;
   left: 50%;
   grid-column-gap: 0vw;
   grid-row-gap: 5vh;

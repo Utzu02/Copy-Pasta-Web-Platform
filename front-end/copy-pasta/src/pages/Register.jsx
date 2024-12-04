@@ -122,7 +122,7 @@ const Register = ({ menuOpen, isMobile}) => {
               <input
                 type="tel"
                 name="telefon"
-                placeholder="telefon"
+                placeholder="Telephone"
                 value={formData.telefon}
                 onChange={handleChange}
                 className={`nickname ${isMobile && 'mobil'}`}

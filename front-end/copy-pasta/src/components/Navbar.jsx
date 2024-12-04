@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import './NavStyle.css'
+import Cookies from 'js-cookie'
 import React from 'react';
 import { Link, Navigate, useLocation } from 'react-router-dom';
 
@@ -14,13 +15,15 @@ const Navbar = ({isMobile,menuOpen,onToggleMenu,isLoggedIn}) => {
     if(menuOpen) onToggleMenu(); // Închide meniul
   }, [location]);
 
-
+  const logOut = () => {
+    Cookies.remove("UID")
+  }
   
 
   const optiuniConfigurari = () => {
     if (location.pathname === '/profile' && isLoggedIn) {
       return (
-        <ul className='setari'><li><Link to="/logout" className='textSectiuni'>Logout</Link></li></ul>
+        <ul className='setari'><li><Link onClick={logOut} className='textSectiuni'>Logout</Link></li></ul>
       )
     }
     else if (location.pathname === '/profile') {
@@ -127,7 +130,7 @@ const Navbar = ({isMobile,menuOpen,onToggleMenu,isLoggedIn}) => {
                 <p className='textLoginMobil'>Profile</p>
               </Link>
             </li>}
-            {isLoggedIn&&<li><Link to="/logout">Logout</Link></li>}
+            {isLoggedIn&&<li><Link onClick={logOut}>Logout</Link></li>}
             {!isLoggedIn&&<li>
               {!isLoggedIn&&<li><Link to="/login">Login</Link></li>}
               <Link to="/register" className='textSectiuni mobilfixchenar'>

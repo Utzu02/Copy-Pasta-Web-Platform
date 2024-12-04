@@ -117,3 +117,11 @@
   .add-recipe-button:active {
     transform: scale(0.95),translateX(-50%); /* Efect de apăsare */
   }
+  @media screen and (max-width: 1400px){
+    .numeBucatar {
+        width: 35vw;
+    }
+    .content-nickname {
+        width: 30vw;
+    }
+  }

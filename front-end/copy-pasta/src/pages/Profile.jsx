@@ -1,11 +1,31 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './../styles/AllStyles.css'
 import '../styles/ProfileStyle.css'
 import Footer from '../components/Footer';
 
-const Profile = ({menuOpen,isMobile }) => {
+const Profile = ({menuOpen,isMobile,UID }) => {
+  const [error, setError] = useState('');
+  const [informatiiProfil, updateInformatiiProfil] = useState([])
+
+  useEffect (() => {
+    const handleSearch = async () => {
+        setError('');
+        try {
+          const response = await fetch(`http://localhost:5000/api/user/${UID}`);
+          if (!response.ok) {
+            throw new Error('Utilizatorul nu a fost găsit.');
+          }
+          const data = await response.json();
+          updateInformatiiProfil(data)
+        } catch (err) {
+          setError(err.message);
+        }
+      };
+      handleSearch()
+  },[])
+  
     return (
         <div className={`${menuOpen&&'blur'}`}>
         <div className='main'>
@@ -35,7 +55,7 @@ const Profile = ({menuOpen,isMobile }) => {
                     </svg>
 
                     {!isMobile&&<div className={`content-nickname ${isMobile&&'mobil'}`}>
-                        <p className={`nickname ${isMobile&&'mobil'}`}>Gogu bucatar</p>
+                        <p className={`nickname ${isMobile&&'mobil'}`}>{informatiiProfil.name}</p>
                         <svg width="100%" height="1" viewBox="0 0 412 1" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                             <line y1="0.5" x2="412" y2="0.5" stroke="white" />
                         </svg>
@@ -55,13 +75,13 @@ const Profile = ({menuOpen,isMobile }) => {
                 </div>
                 <div className={`informatiiBucatar flex ${isMobile&&'mobil'}`}>
                     <div className={`content-nickname informatii ${isMobile&&'mobil'}`}>
-                        <p className={`nickname ${isMobile&&'mobil'}`}>Email: </p>
+                        <p className={`nickname ${isMobile&&'mobil'}`}>Email: {informatiiProfil.email}</p>
                         <svg width="100%" height="1" viewBox="0 0 412 1" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                             <line y1="0.5" x2="412" y2="0.5" stroke="white" />
                         </svg>
                     </div>
                     <div className={`content-nickname informatii ${isMobile&&'mobil'}`}>
-                        <p className={`nickname ${isMobile&&'mobil'}`}>Telephone: </p>
+                        <p className={`nickname ${isMobile&&'mobil'}`}>Telephone: {informatiiProfil.telefon}</p>
                         <svg width="100%" height="1" viewBox="0 0 412 1" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                             <line y1="0.5" x2="412" y2="0.5" stroke="white" />
                         </svg>
