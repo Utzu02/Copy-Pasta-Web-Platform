@@ -16,6 +16,9 @@
     width: 80vw;
     height: 55vh;
 }
+.informatiiBucatar.add.register.mobil .loginText {
+    padding-bottom: 2vh;
+}
 .forgot-password {
     text-decoration: underline;
     color: white;
@@ -34,6 +37,13 @@
 .add-recipe-button.login.add.signup {
     margin-bottom: 5vh;
     margin-top: 5vh;
+}.add-recipe-button.login.add.signup.mobileReg {
+    margin-bottom: 0vh ;
+    padding: 1vh 10vw !important;
+    border-radius: 20px;
+    font-weight: 700;
+    margin-top: 6vh;
+    font-size: 20px;
 }
 .content-nickname.informatii input {
     background-color: #00236D;
@@ -70,7 +80,7 @@
     width: 60vw;
 }
 .loginText.loginmobile {
-    font-size: 20px;
+    font-size: 24px;
 }
 .forgot-password.mobilelogin {
     font-size: 14px;
@@ -82,4 +92,9 @@
 .main.mobil {
     min-height: 65vh;
     background-image: none;
+}
+.profil.mobileRegister {
+    padding-top: 0;
+    align-items: start;
+    height: 68vh;
 }

@@ -57,12 +57,12 @@ const Register = ({ menuOpen, isMobile }) => {
   return (
     <div className={`${menuOpen && 'blur'}`}>
       <div className={`main ${isMobile && 'mobil'}`}>
-        <div className={`profil ${isMobile && 'mobile'} flex`}>
+        <div className={`profil ${isMobile && 'mobileRegister'} flex`}>
           <form
             className={`informatiiBucatar add ${isMobile && 'mobil'} register flex`}
             onSubmit={handleSubmit}
           >
-            <h2 className={`loginText ${isMobile&&'loginmobile'} `}>Hai, fă foamea cu noi!</h2>
+            <h2 className={`loginText ${isMobile&&'loginmobile'} `}>Hai, fă foamea<br></br> cu noi!</h2>
 
             {/* Full Name */}
             <div className={`content-nickname informatii ${isMobile && 'mobil'} add`}>
@@ -182,7 +182,7 @@ const Register = ({ menuOpen, isMobile }) => {
             {/* Submit Button */}
             <button
               type="submit"
-              className={`add-recipe-button login signup add ${isMobile && 'mobile'}`}
+              className={`add-recipe-button login signup add ${isMobile && 'mobileReg'}`}
             >
               Sign Up
             </button>
