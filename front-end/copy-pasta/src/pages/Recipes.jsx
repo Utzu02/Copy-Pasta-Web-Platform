@@ -21,8 +21,6 @@ const Recipes = ({ menuOpen, isMobile }) => {
     console.log(e.target.value)
   };
 
-  // State pentru controlul vizibilității dropdown-urilor
-  // Funcție pentru a deschide filtrul și închide sortarea
   const toggleFilterDropdown = () => {
     setIsFilterOpen(!isFilterOpen);  // Toggle filter
     if (isSortOpen) setIsSortOpen(false);  // Închide sortarea dacă este deschisă

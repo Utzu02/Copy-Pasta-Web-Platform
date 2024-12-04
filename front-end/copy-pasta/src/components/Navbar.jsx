@@ -3,16 +3,8 @@ import './NavStyle.css'
 import React from 'react';
 import { Link, Navigate, useLocation } from 'react-router-dom';
 
-const Navbar = ({isMobile,menuOpen,onToggleMenu}) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+const Navbar = ({isMobile,menuOpen,onToggleMenu,isLoggedIn}) => {
   const location = useLocation();
-  const checkToken = async () => {
-    const token = localStorage.getItem('token');
-    if (!token) return;
-
-    setIsLoggedIn(true);
-  }
-
   const toggleMenu = () => {
     onToggleMenu(!menuOpen); // Inversăm starea meniului
   };

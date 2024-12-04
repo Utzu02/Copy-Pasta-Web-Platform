@@ -1,22 +1,23 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import './../styles/AllStyles.css';
 import '../styles/ProfileStyle.css';
 import '../styles/AddRecipe.css';
 import '../styles/LoginStyle.css';
 import Footer from '../components/Footer';
 
-const Register = ({ menuOpen, isMobile }) => {
+const Register = ({ menuOpen, isMobile}) => {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
-    fullName: '',
-    telephone: '',
+    nume: '',
+    telefon: '',
     email: '',
-    password: '',
+    parola: '',
     confirmPassword: '',
   });
   const [errors, setErrors] = useState({});
-
+  const [isLoading, setIsLoading] = useState(false); // Opțional, pentru a indica încărcarea
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -24,34 +25,61 @@ const Register = ({ menuOpen, isMobile }) => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.fullName) newErrors.fullName = 'Nu ai completat numele!';
-    if (!formData.telephone) newErrors.telephone = 'Nu ai completat numărul de telefon!';
+    if (!formData.nume) newErrors.nume = 'Nu ai completat numele!';
+    if (!formData.telefon) newErrors.telefon = 'Nu ai completat numărul de telefon!';
     if (!formData.email) newErrors.email = 'Nu ai completat email-ul!';
-    if (!formData.password) newErrors.password = 'Nu ai completat parola!';
-    if (formData.password !== formData.confirmPassword) {
+    if (!formData.parola) newErrors.parola = 'Nu ai completat parola!';
+    if (formData.parola !== formData.confirmPassword) {
       newErrors.confirmPassword = 'Parolele nu sunt identice!';
     }
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
-    console.log('Form submitted:', formData);
 
-    // Golește formularul după submit
-    setFormData({
-      fullName: '',
-      telephone: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    });
-    setErrors({});
+    setIsLoading(true); // Setează loading-ul la true în momentul trimiterii formularului
+    console.log(JSON.stringify(formData))
+    try {
+      // Trimite cererea POST către server
+      const response = await fetch('http://localhost:5000/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData), // Trimite datele din formular
+      });
+
+      // Verifică răspunsul serverului
+      if (!response.ok) {
+        throw new Error('Eroare la înregistrare');
+      }
+
+      const data = await response.json();
+      console.log('Înregistrare reușită:', data);
+
+      // Golește formularul după submit
+      setFormData({
+        nume: '',
+        telefon: '',
+        email: '',
+        parola: '',
+        confirmPassword: '',
+      });
+      setErrors({});
+      navigate('/')
+    } catch (error) {
+      console.error('Eroare la trimiterea formularului:', error);
+      setErrors({ server: 'Nu s-a putut înregistra utilizatorul. Încearcă din nou!' });
+    } finally {
+      setIsLoading(false); // Setează loading-ul la false după finalizarea cererii
+    }
   };
 
   return (
@@ -62,15 +90,17 @@ const Register = ({ menuOpen, isMobile }) => {
             className={`informatiiBucatar add ${isMobile && 'mobil'} register flex`}
             onSubmit={handleSubmit}
           >
-            <h2 className={`loginText ${isMobile&&'loginmobile'} `}>Hai, fă foamea<br></br> cu noi!</h2>
+            <h2 className={`loginText ${isMobile && 'loginmobile'}`}>
+              Hai, fă foamea<br></br> cu noi!
+            </h2>
 
             {/* Full Name */}
             <div className={`content-nickname informatii ${isMobile && 'mobil'} add`}>
               <input
                 type="text"
-                name="fullName"
+                name="nume"
                 placeholder="Full name"
-                value={formData.fullName}
+                value={formData.nume}
                 onChange={handleChange}
                 className={`nickname ${isMobile && 'mobil'}`}
               />
@@ -84,16 +114,16 @@ const Register = ({ menuOpen, isMobile }) => {
               >
                 <line y1="0.5" x2="412" y2="0.5" stroke="white" />
               </svg>
-              {errors.fullName && <p className="error">{errors.fullName}</p>}
+              {errors.nume && <p className="error">{errors.nume}</p>}
             </div>
 
-            {/* Telephone */}
+            {/* telefon */}
             <div className={`content-nickname informatii ${isMobile && 'mobil'} add`}>
               <input
                 type="tel"
-                name="telephone"
-                placeholder="Telephone"
-                value={formData.telephone}
+                name="telefon"
+                placeholder="telefon"
+                value={formData.telefon}
                 onChange={handleChange}
                 className={`nickname ${isMobile && 'mobil'}`}
               />
@@ -107,7 +137,7 @@ const Register = ({ menuOpen, isMobile }) => {
               >
                 <line y1="0.5" x2="412" y2="0.5" stroke="white" />
               </svg>
-              {errors.telephone && <p className="error">{errors.telephone}</p>}
+              {errors.telefon && <p className="error">{errors.telefon}</p>}
             </div>
 
             {/* Email */}
@@ -137,9 +167,9 @@ const Register = ({ menuOpen, isMobile }) => {
             <div className={`content-nickname informatii ${isMobile && 'mobil'} add`}>
               <input
                 type="password"
-                name="password"
+                name="parola"
                 placeholder="Password"
-                value={formData.password}
+                value={formData.parola}
                 onChange={handleChange}
                 className={`nickname ${isMobile && 'mobil'}`}
               />
@@ -153,7 +183,7 @@ const Register = ({ menuOpen, isMobile }) => {
               >
                 <line y1="0.5" x2="412" y2="0.5" stroke="white" />
               </svg>
-              {errors.password && <p className="error">{errors.password}</p>}
+              {errors.parola && <p className="error">{errors.parola}</p>}
             </div>
 
             {/* Confirm Password */}
@@ -183,8 +213,9 @@ const Register = ({ menuOpen, isMobile }) => {
             <button
               type="submit"
               className={`add-recipe-button login signup add ${isMobile && 'mobileReg'}`}
+              disabled={isLoading} // Dezactivează butonul în timpul încărcării
             >
-              Sign Up
+              {isLoading ? 'Înregistrare în curs...' : 'Sign Up'}
             </button>
           </form>
         </div>

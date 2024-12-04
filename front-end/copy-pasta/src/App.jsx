@@ -13,6 +13,20 @@ import AddRecipes from './pages/AddRecipes';
 import NotFound from './pages/NotFound';
 
 function App() {
+
+  useEffect(() => {
+    // Funcție pentru a citi un cookie
+    const getCookie = (name) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    };
+
+    // Obținem valoarea cookie-ului `userEmail` și o setăm în starea locală
+    const email = getCookie('userEmail');
+    console.log(email)
+  }, []);
+
   const [isMobile, setIsMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   // Actualizează starea în funcție de dimensiunea ecranului
@@ -34,18 +48,24 @@ function App() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const checkToken = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) return;
 
+    setIsLoggedIn(true);
+  }
   return (
     <Router>
-      {<Navbar isMobile={isMobile} menuOpen={menuOpen} onToggleMenu={handleMenuToggle}/>}
+      {<Navbar isMobile={isMobile} menuOpen={menuOpen} onToggleMenu={handleMenuToggle} isLoggedIn={isLoggedIn}/>}
       <Routes>
         <Route path="/" element={<Home menuOpen={menuOpen} isMobile={isMobile}/>} />
         <Route path="/recipes" element={<Recipes menuOpen={menuOpen} isMobile={isMobile}/>} />
-        <Route path="/profile" element={<Profile menuOpen={menuOpen} isMobile={isMobile}/>} />
-        <Route path="/register" element={<Register menuOpen={menuOpen} isMobile={isMobile}/>} />
-        <Route path="/login" element={<Login menuOpen={menuOpen} isMobile={isMobile}/>} />
-        <Route path="/forgot-password" element={<ForgotPassword menuOpen={menuOpen} isMobile={isMobile}/>} />
-        <Route path="/add-recipe" element={<AddRecipes menuOpen={menuOpen} isMobile={isMobile}/>} />
+        <Route path="/profile" element={isLoggedIn?<Profile menuOpen={menuOpen} isMobile={isMobile}/>:<Navigate to='/login' />} />
+        <Route path="/register" element={!isLoggedIn?<Register menuOpen={menuOpen} isMobile={isMobile}/>:<Navigate to='/'/>} />
+        <Route path="/login" element={!isLoggedIn?<Login menuOpen={menuOpen} isMobile={isMobile}/>:<Navigate to='/'/>} />
+        <Route path="/forgot-password" element={!isLoggedIn?<ForgotPassword menuOpen={menuOpen} isMobile={isMobile}/>:<Navigate to='/'/>} />
+        <Route path="/add-recipe" element={isLoggedIn?<AddRecipes menuOpen={menuOpen} isMobile={isMobile}/>:<Navigate to='/login'/>} />
         <Route path="/not-found" element={<NotFound />} />
         <Route path="*" element={<Navigate to='/not-found' />} />
       </Routes>

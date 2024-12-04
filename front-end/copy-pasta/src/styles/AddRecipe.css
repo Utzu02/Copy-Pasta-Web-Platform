@@ -80,3 +80,21 @@
         font-size: 20px;
       }
 }
+.imgtext {
+  padding-top: 1vh;
+  color: white;
+}
+textarea.nickname {
+  background-color: #00236D;
+  border: 0;
+  color: white;
+  resize: none;
+  
+}
+textarea.nickname::placeholder {
+  color: white;
+}
+textarea.nickname:focus {
+  color: white;
+  border: 0;
+}
