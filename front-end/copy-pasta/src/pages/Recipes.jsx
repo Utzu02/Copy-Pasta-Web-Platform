@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 const Recipes = ({ menuOpen, isMobile }) => {
 
   const [recipes, setRecipes] = useState([]); // State pentru rețete
-  const [filteredRecipes, setFilteredRecipes] = useState([]); // Rețete filtrate
+  const [searchedRecipes, setSearchedRecipes] = useState([]); // Rețete filtrate
   const [searchQuery, setSearchQuery] = useState("");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
@@ -17,8 +17,16 @@ const Recipes = ({ menuOpen, isMobile }) => {
   // Schimbăm valoarea în input
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
+    search(e.target.value)
   };
+  const search = (item) => {
+    let searched = [...recipes]; // Facem o copie a rețetelor
+    // Reuniunea filtrează rețetele care au ratingurile selectate
+    searched = searched.filter(recipe => recipe.title.toLowerCase().startsWith(item.toLowerCase(),0));
 
+    setSearchedRecipes(searched); // Setăm rețetele filtrate
+
+  }
   const toggleFilterDropdown = () => {
     setIsFilterOpen(!isFilterOpen);  // Toggle filter
     if (isSortOpen) setIsSortOpen(false);  // Închide sortarea dacă este deschisă
@@ -63,7 +71,7 @@ const Recipes = ({ menuOpen, isMobile }) => {
         const response = await fetch('http://localhost:5000/api/get-recipes');
         const data = await response.json();
         setRecipes(data); // Stochează rețetele în state
-        setFilteredRecipes(data); // Inițial, setăm toate rețetele
+        setSearchedRecipes(data); // Inițial, setăm toate rețetele
       } catch (error) {
         console.error('Eroare la preluarea rețetelor:', error);
       }
@@ -74,11 +82,11 @@ const Recipes = ({ menuOpen, isMobile }) => {
 
   // Funcția de filtrare
   const filterRecipesByRating = () => {
-    let filtered = [...recipes]; // Facem o copie a rețetelor
+    let filtered = [...searchedRecipes]; // Facem o copie a rețetelor
 
     // Dacă niciun checkbox nu este selectat, afișăm toate rețetele
     if (!checkboxes.some(isChecked => isChecked)) {
-      setFilteredRecipes(recipes);
+      setSearchedRecipes(searchedRecipes);
       return;
     }
 
@@ -87,7 +95,7 @@ const Recipes = ({ menuOpen, isMobile }) => {
       checkboxes.some((isChecked, index) => isChecked && recipe.ratings === 5-index)
     );
 
-    setFilteredRecipes(filtered); // Setăm rețetele filtrate
+    setSearchedRecipes(filtered); // Setăm rețetele filtrate
   };
 
   // Folosim un useEffect pentru a filtra rețetele de fiecare dată când checkbox-urile se schimbă
@@ -97,7 +105,7 @@ const Recipes = ({ menuOpen, isMobile }) => {
 
   // Funcția pentru sortare
   const sortRecipes = (option) => {
-    let sorted = [...filteredRecipes]; // Facem o copie a rețetelor filtrate
+    let sorted = [...searchedRecipes]; // Facem o copie a rețetelor filtrate
 
     switch (option) {
       case 'Top rated':
@@ -116,7 +124,7 @@ const Recipes = ({ menuOpen, isMobile }) => {
         break;
     }
 
-    setFilteredRecipes(sorted); // Setăm rețetele sortate
+    setSearchedRecipes(sorted); // Setăm rețetele sortate
   };
 
   // Funcția care se apelează când se alege o opțiune de sortare
@@ -203,7 +211,7 @@ const Recipes = ({ menuOpen, isMobile }) => {
           </div>
 
           <div className={`grid-container ${isMobile && 'mobil'}`}>
-            {filteredRecipes.map((recipe, index) => (
+            {searchedRecipes.map((recipe, index) => (
               <div className={`grid-item ${isMobile && 'mobil'}`} key={index}>
                 <img src={`http://localhost:5000${recipe.image}`} alt="recipe" />
                 <img className="linieoriz" src={linieorizontala} alt="linie"></img>

@@ -37,8 +37,17 @@
 .item img {
     display: flex;
     height: 28vh;
+    max-width: 13vw;
 }
-
+@media  screen and (max-width: 1500px) {
+    .item img {max-width: 20vw;}
+}
+@media  screen and (max-width: 1000px) {
+    .item img {max-width: 25vw;}
+}
+@media  screen and (max-width: 600px) {
+    .item img {max-width: 35vw;}
+}
 .informatii {
     padding-left: 2vw;
     padding-right: 2vw;

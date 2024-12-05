@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./CarouselStyle.css"; // Include stilurile din secțiunea CSS
 import "./../styles/AllStyles.css"
 import "./../styles/Homepage.css"
@@ -9,32 +9,27 @@ import linie from './../assets/linie.svg'
 
 const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [recipes,setRecipes] = useState ([]);
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/get-recipes');
+        const data = await response.json();
+        setRecipes(data); // Stochează rețetele în state
+        sortRecipes(data);
+      } catch (error) {
+        console.error('Eroare la preluarea rețetelor:', error);
+      }
+    };
+    fetchRecipes();
+  }, []); // Array de dependențe gol => se execută o singură dată, la montarea componentei
 
-  const recipes = [
-    {
-      title: "Reteta 1",
-      image: ex1, // Imaginea poate fi schimbată cu o cale validă
-      author: "Prenume Nume",
-      ratings: 5,
-      nrratinguri: 194,
-    },
-    {
-      title: "Reteta 2",
-      image: ex2,
-      author: "Prenume Nume",
-      ratings: 4,
-      nrratinguri: 434,
-    },
-    {
-      title: "Reteta 3",
-      image: ex2,
-      author: "Prenume Nume",
-      ratings: 5,
-      nrratinguri: 514,
-    },
-  ];
 
-  const totalSlides = recipes.length;
+  const sortRecipes = (newRecipes) => {
+    const sorted = [...newRecipes].sort((a,b) => b.ratings - a.ratings)
+    setRecipes(sorted.slice(0, 3));
+  }
+  const totalSlides = 3;
 
   // Butoanele pentru navigare
   const nextSlide = () => {
@@ -59,7 +54,7 @@ const Carousel = () => {
               className={`flex item carousel-item ${index === currentSlide ? "active" : "hidden"
                 }`}
             >
-              <img src={recipe.image} alt={recipe.title} />
+              <img src={`http://localhost:5000${recipe.image}`} alt={recipe.title} />
               <img className="linie" src={linie}></img>
               <div className="informatii">
                 <p className='titlureteta'>
