@@ -115,6 +115,7 @@ const AddRecipes = ({ menuOpen, isMobile,UID }) => {
                             <textarea
                                 name="description"
                                 placeholder="Description:"
+                                maxlength="170"
                                 value={description}
                                 onChange={handleChange}
                                 className={`nickname ${isMobile && 'mobil'}`}

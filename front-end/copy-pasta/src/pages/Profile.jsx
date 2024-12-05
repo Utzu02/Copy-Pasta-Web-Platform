@@ -25,7 +25,13 @@ const Profile = ({menuOpen,isMobile,UID }) => {
       };
       handleSearch()
   },[])
-  
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    updateInformatiiProfil((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
     return (
         <div className={`${menuOpen&&'blur'}`}>
         <div className='main'>
@@ -55,13 +61,20 @@ const Profile = ({menuOpen,isMobile,UID }) => {
                     </svg>
 
                     {!isMobile&&<div className={`content-nickname ${isMobile&&'mobil'}`}>
-                        <p className={`nickname ${isMobile&&'mobil'}`}>{informatiiProfil.name}</p>
+                        <textarea
+                className={`nickname ${isMobile && 'mobil'} noresize`}
+                name="name"
+                maxlength="30"
+                value={informatiiProfil.name}
+                onChange={handleInputChange}
+              />
                         <svg width="100%" height="1" viewBox="0 0 412 1" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                             <line y1="0.5" x2="412" y2="0.5" stroke="white" />
                         </svg>
                     </div>}
                     {isMobile&&<div className={`content-nickname ${isMobile&&'mobil'}`}>
                         <p className={`nickname ${isMobile&&'mobil'}`}>First name:</p>
+                        
                         <svg width="100%" height="1" viewBox="0 0 412 1" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                             <line y1="0.5" x2="412" y2="0.5" stroke="white" />
                         </svg>
@@ -75,20 +88,47 @@ const Profile = ({menuOpen,isMobile,UID }) => {
                 </div>
                 <div className={`informatiiBucatar flex ${isMobile&&'mobil'}`}>
                     <div className={`content-nickname informatii ${isMobile&&'mobil'}`}>
-                        <p className={`nickname ${isMobile&&'mobil'}`}>Email: {informatiiProfil.email}</p>
+                        <div className='flex flex-row'>
+                        <p className={`nickname ${isMobile&&'mobil'}`}>Email:</p>
+                        <textarea
+                className={`nickname ${isMobile && 'mobil'} p1 noresize`}
+                name="email"
+                maxlength="30"
+                value={informatiiProfil.email}
+                onChange={handleInputChange}
+              /></div>
                         <svg width="100%" height="1" viewBox="0 0 412 1" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                             <line y1="0.5" x2="412" y2="0.5" stroke="white" />
                         </svg>
                     </div>
                     <div className={`content-nickname informatii ${isMobile&&'mobil'}`}>
-                        <p className={`nickname ${isMobile&&'mobil'}`}>Telephone: {informatiiProfil.telefon}</p>
+                        <div className='flex flex-row'>
+                        <p className={`nickname ${isMobile&&'mobil'}`}>Telephone: </p>
+                        <textarea
+                className={`nickname ${isMobile && 'mobil'} noresize p1`}
+                name="telefon"
+                maxlength="20"
+                value={informatiiProfil.telefon}
+                onChange={handleInputChange}
+              />
+                        </div>
                         <svg width="100%" height="1" viewBox="0 0 412 1" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                             <line y1="0.5" x2="412" y2="0.5" stroke="white" />
                         </svg>
 
+
                     </div>
                     <div className={`content-nickname informatii ${isMobile&&'mobil'}`}>
+                        <div className='flex flex-row'>
                         <p className={`nickname ${isMobile&&'mobil'}`}>College group:</p>
+                        <textarea
+                className={`nickname ${isMobile && 'mobil'} noresize w-60 p1`}
+                name="college"
+                maxlength="30"
+                value={informatiiProfil.college}
+                onChange={handleInputChange}
+              />
+                        </div>
                         <svg width="100%" height="1" viewBox="0 0 412 1" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                             <line y1="0.5" x2="412" y2="0.5" stroke="white" />
                         </svg>

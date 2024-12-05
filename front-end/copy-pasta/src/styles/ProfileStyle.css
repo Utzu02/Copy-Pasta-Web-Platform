@@ -15,7 +15,7 @@
 }
 .numeBucatar {
     background: #00236D;
-    width: 25vw;
+    width: 27vw;
     height: 45vh;
     display: flex;
     border-radius: 25px;
@@ -24,6 +24,7 @@
     align-items: center;
 }
 .svgbucatar {
+    padding-top: 1vh;
     height: 34vh;
 }
 .svgbucatar.mobil {
@@ -36,9 +37,9 @@
     justify-content: space-evenly;
 }
 .informatiiBucatar.mobil {
-    height: 24vh;
+    height: 27vh;
     justify-content: space-evenly;
-    width: 80vw;
+    width: 85vw;
     padding-bottom: 3vh;
 }
 
@@ -49,7 +50,7 @@
     font-size: 14px !important;
 }
 .content-nickname.informatii.mobil {
-    width: 70vw;
+    width: 75vw;
 }
 .nickname {
     font-size: 24px;
@@ -57,7 +58,7 @@
     color: white;
 }
 .content-nickname {
-    width: 20vw;
+    width: 22vw;
     padding: 0;
     display: flex;
     gap: .8vh;
@@ -66,7 +67,7 @@
 }
 .informatiiBucatar {
     background: #00236D;
-    width: 35vw;
+    width: 40vw;
     height: 45vh;
     display: flex;
     border-radius: 25px;
@@ -75,9 +76,18 @@
     align-items: center;
 }
 .content-nickname.informatii {
-    width: 30vw;
+    width: 35vw;
 }
-
+@media screen and (max-width: 1200px)
+{
+    .informatiiBucatar {width: 45vw;}
+    .content-nickname.informatii {width: 40vw;}
+}
+@media screen and (max-width: 1200px)
+{
+    .informatiiBucatar {width: 50vw;}
+    .content-nickname.informatii {width: 45vw;}
+}
 .add-recipe-button {
     position: absolute;
     left: 50%;
@@ -124,4 +134,13 @@
     .content-nickname {
         width: 30vw;
     }
+  }
+  .noresize {
+    field-sizing: fixed !important;
+    height: 40% !important;
+    width: 100%;
+  }
+  .informatiiBucatar .noresize {
+    height: 54% !important;
+    width: 85%;
   }

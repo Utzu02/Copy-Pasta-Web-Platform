@@ -88,6 +88,9 @@ textarea.nickname {
   background-color: #00236D;
   border: 0;
   color: white;
+  height: 100%;
+  overflow-y: hidden;
+  field-sizing: content;
   resize: none;
   
 }

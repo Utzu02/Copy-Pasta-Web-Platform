@@ -6,12 +6,13 @@
     /*stilizare navbar*/
     position: absolute;
     width: 100%;
-    min-height: 11vh;
+    min-height: 12vh;
     left: 0;
     right: 0px;
     gap:8vw;
     top: 0px;
     display: flex;
+    align-items: center;
     background: #00236D;
     box-shadow: 0px 1px 14px #021B2C;
     border-radius: 0px 0px 25px 25px;

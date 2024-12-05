@@ -48,12 +48,12 @@
   }
   
   .carousel-item h3 {
-    font-size: 16px;
+    font-size: 13px;
     color: #00236d;
   }
   
   .ratings {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: #f4c542;
   }
   
@@ -91,14 +91,14 @@
     font-size: 11px;
   }
   .informatiisuplimentare{
-    font-size: 12px;
+    font-size: 12px !important;
   }
   .informatii {
-    padding-left: 3.5vw;
-    padding-right: 3.5vw;
+    padding-left: 3vw;
+    padding-right: 3vw;
   }
   .titlureteta {
     padding-top: 1vh;
-    font-size: 15px;
+    font-size: 14px;
     margin-bottom: -1vh;
   }
