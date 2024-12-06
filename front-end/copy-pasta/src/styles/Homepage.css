@@ -25,6 +25,7 @@
     justify-content: space-evenly;
     padding-left: 5vw;
     padding-right: 5vw;
+    min-height: 28vh;
     flex-wrap: wrap;
     padding-bottom: 7vh;
 }

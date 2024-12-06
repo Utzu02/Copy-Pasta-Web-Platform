@@ -73,11 +73,20 @@
     padding-top: 0;
 }
 .informatiiBucatar.add.loginmobile {
-    width: 70vw;
+    width: 80vw;
     height: 40vh;
 }
 .content-nickname.informatii.loginmobile {
-    width: 60vw;
+    width: 70vw;
+}
+@media  screen and (min-width: 600px) {
+    .informatiiBucatar.add.loginmobile {
+        width: 60vw;
+        height: 40vh;
+    }
+    .content-nickname.informatii.loginmobile {
+        width: 50vw;
+    }
 }
 .loginText.loginmobile {
     font-size: 24px;

@@ -7,6 +7,8 @@ import '../styles/AddRecipe.css';
 import '../styles/LoginStyle.css';
 import Footer from '../components/Footer';
 import Cookies from 'js-cookie';
+import parolasvg from '../assets/parola.svg'
+import mailsvg from '../assets/mail.svg'
 
 const Login = ({ menuOpen, isMobile }) => {
   const [email, setEmail] = useState('');
@@ -74,13 +76,15 @@ const Login = ({ menuOpen, isMobile }) => {
 
             {/* Input pentru email */}
             <div className={`content-nickname informatii ${isMobile && 'loginmobile'} add`}>
+              <div className='flex'>
+                <img src={mailsvg}/>
               <input
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={handleEmailChange}
-                className={`nickname ${isMobile && 'mobil'}`}
-              />
+                className={`p1 nickname ${isMobile && 'mobil'}`}
+              /></div>
               <svg
                 width="100%"
                 height="1"
@@ -96,13 +100,15 @@ const Login = ({ menuOpen, isMobile }) => {
 
             {/* Input pentru password */}
             <div className={`content-nickname informatii ${isMobile && 'loginmobile'} add`}>
+              <div className='flex'>
+              <img src={parolasvg}></img>
               <input
                 type="password"
                 placeholder="Password"
                 value={parola}
                 onChange={handleParolaChange}
-                className={`nickname ${isMobile && 'mobil'}`}
-              />
+                className={`p1 nickname ${isMobile && 'mobil'}`}
+              /></div>
               <svg
                 width="100%"
                 height="1"

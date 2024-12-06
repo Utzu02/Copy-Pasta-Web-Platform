@@ -6,6 +6,10 @@ import '../styles/ProfileStyle.css';
 import '../styles/AddRecipe.css';
 import '../styles/LoginStyle.css';
 import Footer from '../components/Footer';
+import usersvg from '../assets/user.svg'
+import telefonsvg from '../assets/telefon.svg'
+import parolasvg from '../assets/parola.svg'
+import mailsvg from '../assets/mail.svg'
 
 const Register = ({ menuOpen, isMobile}) => {
   const navigate = useNavigate()
@@ -96,14 +100,18 @@ const Register = ({ menuOpen, isMobile}) => {
 
             {/* Full Name */}
             <div className={`content-nickname informatii ${isMobile && 'mobil'} add`}>
+              <div className='flex'>
+              <img src={usersvg}/>
               <input
                 type="text"
                 name="nume"
                 placeholder="Full name"
                 value={formData.nume}
                 onChange={handleChange}
-                className={`nickname ${isMobile && 'mobil'}`}
+                className={`p1 nickname ${isMobile && 'mobil'}`}
               />
+
+              </div>
               <svg
                 width="100%"
                 height="1"
@@ -116,17 +124,20 @@ const Register = ({ menuOpen, isMobile}) => {
               </svg>
               {errors.nume && <p className="error">{errors.nume}</p>}
             </div>
-
-            {/* telefon */}
             <div className={`content-nickname informatii ${isMobile && 'mobil'} add`}>
+              
+            <div className='flex'>
+            
+            <img src={telefonsvg}/>
               <input
                 type="tel"
                 name="telefon"
                 placeholder="Telephone"
                 value={formData.telefon}
                 onChange={handleChange}
-                className={`nickname ${isMobile && 'mobil'}`}
+                className={`p1 nickname ${isMobile && 'mobil'}`}
               />
+              </div>
               <svg
                 width="100%"
                 height="1"
@@ -140,16 +151,19 @@ const Register = ({ menuOpen, isMobile}) => {
               {errors.telefon && <p className="error">{errors.telefon}</p>}
             </div>
 
-            {/* Email */}
             <div className={`content-nickname informatii ${isMobile && 'mobil'} add`}>
+            <div className='flex'>
+              <img src={mailsvg}/>
               <input
                 type="email"
                 name="email"
                 placeholder="E-mail"
                 value={formData.email}
                 onChange={handleChange}
-                className={`nickname ${isMobile && 'mobil'}`}
+                className={`p1 nickname ${isMobile && 'mobil'}`}
               />
+
+              </div>
               <svg
                 width="100%"
                 height="1"
@@ -163,16 +177,18 @@ const Register = ({ menuOpen, isMobile}) => {
               {errors.email && <p className="error">{errors.email}</p>}
             </div>
 
-            {/* Password */}
             <div className={`content-nickname informatii ${isMobile && 'mobil'} add`}>
+            <div className='flex'>
+              <img src={parolasvg}/>
               <input
                 type="password"
                 name="parola"
                 placeholder="Password"
                 value={formData.parola}
                 onChange={handleChange}
-                className={`nickname ${isMobile && 'mobil'}`}
+                className={`p1 nickname ${isMobile && 'mobil'}`}
               />
+              </div>
               <svg
                 width="100%"
                 height="1"
@@ -188,14 +204,17 @@ const Register = ({ menuOpen, isMobile}) => {
 
             {/* Confirm Password */}
             <div className={`content-nickname informatii ${isMobile && 'mobil'} add`}>
+              <div className='flex'>
+              <img src={parolasvg}></img>
               <input
                 type="password"
                 name="confirmPassword"
                 placeholder="Confirm Password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className={`nickname ${isMobile && 'mobil'}`}
+                className={`p1 nickname ${isMobile && 'mobil'}`}
               />
+              </div>
               <svg
                 width="100%"
                 height="1"

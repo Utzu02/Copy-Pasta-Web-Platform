@@ -24,7 +24,7 @@ const Profile = ({menuOpen,isMobile,UID }) => {
         }
       };
       handleSearch()
-  },[])
+  },[UID])
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     updateInformatiiProfil((prev) => ({
@@ -64,7 +64,7 @@ const Profile = ({menuOpen,isMobile,UID }) => {
                         <textarea
                 className={`nickname ${isMobile && 'mobil'} noresize`}
                 name="name"
-                maxlength="30"
+                maxlength="35"
                 value={informatiiProfil.name}
                 onChange={handleInputChange}
               />
@@ -93,7 +93,7 @@ const Profile = ({menuOpen,isMobile,UID }) => {
                         <textarea
                 className={`nickname ${isMobile && 'mobil'} p1 noresize`}
                 name="email"
-                maxlength="30"
+                maxlength="35"
                 value={informatiiProfil.email}
                 onChange={handleInputChange}
               /></div>
@@ -107,7 +107,7 @@ const Profile = ({menuOpen,isMobile,UID }) => {
                         <textarea
                 className={`nickname ${isMobile && 'mobil'} noresize p1`}
                 name="telefon"
-                maxlength="20"
+                maxlength="10"
                 value={informatiiProfil.telefon}
                 onChange={handleInputChange}
               />

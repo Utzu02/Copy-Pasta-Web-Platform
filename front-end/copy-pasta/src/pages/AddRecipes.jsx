@@ -6,7 +6,7 @@ import '../styles/ProfileStyle.css';
 import '../styles/AddRecipe.css';
 import Footer from '../components/Footer';
 
-const AddRecipes = ({ menuOpen, isMobile,UID }) => {
+const AddRecipes = ({ menuOpen, isMobile,UID,userName }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState(null);  // Stocăm fișierul separat
@@ -56,12 +56,13 @@ const AddRecipes = ({ menuOpen, isMobile,UID }) => {
             const formDataToSend = new FormData();
             formDataToSend.append('title', title);
             formDataToSend.append('description', description);
-            formDataToSend.append('author', "aut");
+            formDataToSend.append('author', userName);
 
             // Dacă fișierul există, îl adăugăm în FormData
             if (image) {
                 formDataToSend.append('image', image); // Fișierul
             }
+            formDataToSend.append('userID', UID);
             
             console.log(title, description, image);
             for (let [key, value] of formDataToSend.entries()) {

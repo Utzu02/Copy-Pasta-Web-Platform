@@ -16,22 +16,42 @@ import Cookies from 'js-cookie'
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [UID, setUID] = useState("")
+  const [name, setName] = useState("")
+  const fetchName = async () => {
+    const _id = UID;
+    const response = await fetch('http://localhost:5000/api/get-name', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({_id}),
+    });
+
+    if (!response.ok) {
+      throw new Error('Eroare la preluarea numelui');
+    }
+    const data = await response.json();
+    setName(data.nume)
+  };
   useEffect(() => {
     const interval = setInterval(() => {
       const id = Cookies.get("UID");
       if (id) {
         setIsLoggedIn(true);
+        if(!UID) setUID(id)
       } else {
         setIsLoggedIn(false);
+        if(UID) setUID(id)
       }
-      setUID(id)
-    }, 1000); // Verifică cookie-ul la fiecare 1 secundă
-
-    return () => clearInterval(interval); // Curăță intervalul atunci când componenta este demontată
+    }, 1000);
+    return () => clearInterval(interval);
   }, []);
+  useEffect(() => {
+    if(UID) fetchName();
+  }, [UID]);
   const [isMobile, setIsMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  // Actualizează starea în funcție de dimensiunea ecranului
+
   const handleMenuToggle = (isOpen) => {
     setMenuOpen(isOpen);
   };
@@ -60,7 +80,7 @@ function App() {
         <Route path="/register" element={!isLoggedIn?<Register menuOpen={menuOpen} isMobile={isMobile}/>:<Navigate to='/'/>} />
         <Route path="/login" element={!isLoggedIn?<Login menuOpen={menuOpen} isMobile={isMobile}/>:<Navigate to='/'/>} />
         <Route path="/forgot-password" element={!isLoggedIn?<ForgotPassword menuOpen={menuOpen} isMobile={isMobile}/>:<Navigate to='/'/>} />
-        <Route path="/add-recipe" element={isLoggedIn?<AddRecipes menuOpen={menuOpen} UID={UID} isMobile={isMobile}/>:<Navigate to='/login'/>} />
+        <Route path="/add-recipe" element={isLoggedIn?<AddRecipes userName={name} menuOpen={menuOpen} UID={UID} isMobile={isMobile}/>:<Navigate to='/login'/>} />
         <Route path="/not-found" element={<NotFound />} />
         <Route path="*" element={<Navigate to='/not-found' />} />
       </Routes>

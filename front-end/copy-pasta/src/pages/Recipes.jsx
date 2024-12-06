@@ -7,38 +7,36 @@ import Footer from '../components/Footer';
 
 const Recipes = ({ menuOpen, isMobile }) => {
 
-  const [recipes, setRecipes] = useState([]); // State pentru rețete
-  const [searchedRecipes, setSearchedRecipes] = useState([]); // Rețete filtrate
+  const [recipes, setRecipes] = useState([]);
+  const [searchedRecipes, setSearchedRecipes] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isSortOpen, setIsSortOpen] = useState(false);
-  const [sortOption, setSortOption] = useState(''); // Pentru selectarea opțiunii de sortare
+  const [sortOption, setSortOption] = useState('');
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
-  // Schimbăm valoarea în input
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
     search(e.target.value)
   };
   const search = (item) => {
-    let searched = [...recipes]; // Facem o copie a rețetelor
-    // Reuniunea filtrează rețetele care au ratingurile selectate
-    searched = searched.filter(recipe => recipe.title.toLowerCase().startsWith(item.toLowerCase(),0));
+    console.log(item)
+    let searched = [...recipes];
+    searched = searched.filter(recipe => recipe.title.toLowerCase().startsWith(item.toLowerCase(), 0));
 
-    setSearchedRecipes(searched); // Setăm rețetele filtrate
-
+    setSearchedRecipes(searched);
   }
   const toggleFilterDropdown = () => {
-    setIsFilterOpen(!isFilterOpen);  // Toggle filter
-    if (isSortOpen) setIsSortOpen(false);  // Închide sortarea dacă este deschisă
+    setIsFilterOpen(!isFilterOpen);
+    if (isSortOpen) setIsSortOpen(false);
   };
 
-  // Funcție pentru a deschide sortarea și închide filtrul
   const toggleSortDropdown = () => {
-    setIsSortOpen(!isSortOpen);  // Toggle sort
-    if (isFilterOpen) setIsFilterOpen(false);  // Închide filtrul dacă este deschis
+    setIsSortOpen(!isSortOpen);
+    if (isFilterOpen) setIsFilterOpen(false);
   };
 
-  // Funcție pentru a închide dropdown-urile când se face clic în afară
   const handleClickOutside = (event) => {
     if (!event.target.closest('.filters-container')) {
       setIsFilterOpen(false);
@@ -53,10 +51,8 @@ const Recipes = ({ menuOpen, isMobile }) => {
     };
   }, []);
 
-  // State pentru checkbox-uri
   const [checkboxes, setCheckboxes] = useState([false, false, false, false, false]);
 
-  // Functie pentru a actualiza starea unui checkbox
   const handleCheckboxChange = (index) => {
     const newCheckboxes = [...checkboxes];
     newCheckboxes[index] = !newCheckboxes[index];
@@ -77,31 +73,29 @@ const Recipes = ({ menuOpen, isMobile }) => {
       }
     };
     fetchRecipes();
-  }, []); // Array de dependențe gol => se execută o singură dată, la montarea componentei
+  }, []);
 
 
   // Funcția de filtrare
   const filterRecipesByRating = () => {
     let filtered = [...searchedRecipes]; // Facem o copie a rețetelor
-
-    // Dacă niciun checkbox nu este selectat, afișăm toate rețetele
     if (!checkboxes.some(isChecked => isChecked)) {
-      setSearchedRecipes(searchedRecipes);
+      setFilteredRecipes(searchedRecipes);
       return;
     }
 
     // Reuniunea filtrează rețetele care au ratingurile selectate
-    filtered = filtered.filter(recipe => 
-      checkboxes.some((isChecked, index) => isChecked && recipe.ratings === 5-index)
+    filtered = filtered.filter(recipe =>
+      checkboxes.some((isChecked, index) => isChecked && recipe.ratings === 5 - index)
     );
 
-    setSearchedRecipes(filtered); // Setăm rețetele filtrate
+    setFilteredRecipes(filtered); // Setăm rețetele filtrate
   };
 
   // Folosim un useEffect pentru a filtra rețetele de fiecare dată când checkbox-urile se schimbă
   useEffect(() => {
     filterRecipesByRating();
-  }, [checkboxes, recipes]); // Se reexecută la schimbarea checkbox-urilor sau a listei de rețete
+  }, [checkboxes, recipes, searchedRecipes]); // Se reexecută la schimbarea checkbox-urilor sau a listei de rețete
 
   // Funcția pentru sortare
   const sortRecipes = (option) => {
@@ -134,6 +128,13 @@ const Recipes = ({ menuOpen, isMobile }) => {
     sortRecipes(option); // Apelăm funcția de sortare
   };
 
+  const closeModal = () => {
+    setSelectedRecipe(null); // Închidem modalul
+  };
+  const handleRecipeClick = (recipe) => {
+    setSelectedRecipe(recipe); // Setăm rețeta selectată
+    console.log(recipe)
+  };
   return (
     <div className={`${menuOpen && 'blur'}`}>
       <div className='main'>
@@ -175,7 +176,7 @@ const Recipes = ({ menuOpen, isMobile }) => {
                           onChange={() => handleCheckboxChange(index)} />
                         <label for={`start${index}`}>
                           <p key={index} className='stars filter'>
-                            {"★".repeat(5-index)}
+                            {"★".repeat(5 - index)}
                             {"☆".repeat(index)}
                           </p>
                         </label>
@@ -211,8 +212,8 @@ const Recipes = ({ menuOpen, isMobile }) => {
           </div>
 
           <div className={`grid-container ${isMobile && 'mobil'}`}>
-            {searchedRecipes.map((recipe, index) => (
-              <div className={`grid-item ${isMobile && 'mobil'}`} key={index}>
+            {filteredRecipes.map((recipe, index) => (
+              <div className={`grid-item ${isMobile && 'mobil'}`} onClick={() => handleRecipeClick(recipe)} key={index}>
                 <img src={`http://localhost:5000${recipe.image}`} alt="recipe" />
                 <img className="linieoriz" src={linieorizontala} alt="linie"></img>
                 <div className='informatii recipe'>
@@ -234,6 +235,28 @@ const Recipes = ({ menuOpen, isMobile }) => {
         </div>
         <Footer isMobile={isMobile} />
       </div>
+      {selectedRecipe && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="close-button" onClick={closeModal}>✖</button>
+            <div className='flex flex-row modal-inf'>
+              <img src={`http://localhost:5000${selectedRecipe.image}`} alt={selectedRecipe.title} />
+              <div className='flex flex-col'>
+                <h2>{selectedRecipe.title}</h2>
+                <p><strong>Author:</strong> {selectedRecipe.author}</p>
+                <div>
+                  <strong>Rating:</strong>{" "}
+                  {"★".repeat(selectedRecipe.ratings)}
+                  {"☆".repeat(5 - selectedRecipe.ratings)}
+                </div>
+              </div>
+            </div>
+            <h3>Description</h3>
+            <img className="linieoriz" src={linieorizontala} alt="linie"></img>
+            <p>{selectedRecipe.description}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

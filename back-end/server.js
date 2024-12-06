@@ -29,7 +29,8 @@ const Recipe = mongoose.model('Recipe', new mongoose.Schema({
   author: { type: String, required: true },
   description: { type: String, required: true },
   ratings: { type: Number, default: 4 },
-  nrratinguri: { type: Number, default: 432 }
+  nrratinguri: { type: Number, default: 432 },
+  userID: {type: String, required: true }
 }));
 
 // Definirea unui model MongoDB pentru User
@@ -67,6 +68,19 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
+app.post('/api/get-name', async (req,res) => {
+  const _id = req.body;
+  try {
+    const user = await User.findOne({_id})
+    if(!user) {
+      return res.status(404).json({ message: "Nu am gasit"})
+    }
+    return res.status(200).json({nume: user.nume})
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Eroare la preluarea numelui.', error });
+  }
+})
 // Ruta pentru autentificarea unui utilizator
 app.post('/api/login', async (req, res) => {
   const { email, parola } = req.body;
@@ -91,7 +105,7 @@ app.post('/api/login', async (req, res) => {
 
 // Ruta combinată pentru adăugarea unei rețete și încărcarea imaginii
 app.post('/api/recipes', upload.single('image'), async (req, res) => {
-  const { title, author, description, ratings = 4, nrratinguri = 432 } = req.body;
+  const { title, author, description, ratings = 5, nrratinguri = 0, userID } = req.body;
   const imageBuffer = req.file ? req.file.buffer : null;
 
   if (!title || !author || !description) {
@@ -105,7 +119,8 @@ app.post('/api/recipes', upload.single('image'), async (req, res) => {
       description,
       ratings,
       nrratinguri,
-      image: imageBuffer
+      image: imageBuffer,
+      userID
     });
 
     await newRecipe.save();
@@ -148,7 +163,6 @@ const getImage = (imageBuffer) => {
       res.status(500).json({ message: 'Eroare la preluarea rețetelor.', error });
     }
   });
-  
   // Ruta pentru a prelua imaginea din MongoDB
   app.get('/api/recipes/image/:id', async (req, res) => {
     try {
