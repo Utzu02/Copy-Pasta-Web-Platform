@@ -21,7 +21,7 @@ const Register = ({ menuOpen, isMobile}) => {
     confirmPassword: '',
   });
   const [errors, setErrors] = useState({});
-  const [isLoading, setIsLoading] = useState(false); // Opțional, pentru a indica încărcarea
+  const [isLoading, setIsLoading] = useState(false); 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -48,19 +48,16 @@ const Register = ({ menuOpen, isMobile}) => {
       return;
     }
 
-    setIsLoading(true); // Setează loading-ul la true în momentul trimiterii formularului
-    console.log(JSON.stringify(formData))
+    setIsLoading(true); 
     try {
-      // Trimite cererea POST către server
       const response = await fetch('http://localhost:5000/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData), // Trimite datele din formular
+        body: JSON.stringify(formData), 
       });
 
-      // Verifică răspunsul serverului
       if (!response.ok) {
         throw new Error('Eroare la înregistrare');
       }
@@ -68,7 +65,6 @@ const Register = ({ menuOpen, isMobile}) => {
       const data = await response.json();
       console.log('Înregistrare reușită:', data);
 
-      // Golește formularul după submit
       setFormData({
         nume: '',
         telefon: '',
@@ -82,7 +78,7 @@ const Register = ({ menuOpen, isMobile}) => {
       console.error('Eroare la trimiterea formularului:', error);
       setErrors({ server: 'Nu s-a putut înregistra utilizatorul. Încearcă din nou!' });
     } finally {
-      setIsLoading(false); // Setează loading-ul la false după finalizarea cererii
+      setIsLoading(false); 
     }
   };
 

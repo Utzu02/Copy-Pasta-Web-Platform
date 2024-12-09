@@ -26,8 +26,8 @@ const Recipe = mongoose.model('Recipe', new mongoose.Schema({
   image: { type: Buffer }, 
   author: { type: String, required: true },
   description: { type: String, required: true },
-  ratings: { type: Number, default: 4 },
-  nrratinguri: { type: Number, default: 432 },
+  ratings: { type: Number, default: 5 },
+  nrratinguri: { type: Number, default: 0 },
   userID: {type: String, required: true }
 }));
 
@@ -122,6 +122,21 @@ app.post('/api/recipes', upload.single('image'), async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Eroare la adăugarea rețetei.', error });
+  }
+});
+app.delete('/api/recipes/delete/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const recipe = await Recipe.findByIdAndDelete(id);
+
+    if (!recipe) {
+      return res.status(404).json({ message: 'Rețeta nu a fost găsită.' });
+    }
+
+    res.status(200).json({ message: 'Rețetă ștearsă cu succes.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Eroare la ștergerea rețetei.', error });
   }
 });
 

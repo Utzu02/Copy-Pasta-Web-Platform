@@ -4,6 +4,7 @@ import './../styles/AllStyles.css';
 import '../styles/RecipesStyle.css';
 import linieorizontala from './../assets/linie-orizontala.svg';
 import Footer from '../components/Footer';
+import { use } from 'react';
 
 const Recipes = ({ menuOpen, userName, isMobile }) => {
 
@@ -16,6 +17,9 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [finalRating, setFinalRating] = useState(0)
+  const [isLoading, setIsLoading] = useState(false); 
+  const [sortMode, setSortMode] = useState('');
+  const [mod,setMod] = useState("")
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
     search(e.target.value)
@@ -24,14 +28,34 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
     console.log(item)
     let searched = [...recipes];
     searched = searched.filter(recipe => recipe.title.toLowerCase().startsWith(item.toLowerCase(), 0));
-
     setSearchedRecipes(searched);
   }
   const toggleFilterDropdown = () => {
     setIsFilterOpen(!isFilterOpen);
     if (isSortOpen) setIsSortOpen(false);
   };
+ const handleDelete =  async (id) => {
+  setSelectedRecipe(null);
+  let updatedRecipes = recipes.filter (recipe => recipe._id !== id)
+  setRecipes(updatedRecipes)
+  updatedRecipes = searchedRecipes.filter (recipe => recipe._id !== id)
+  setSearchedRecipes(updatedRecipes)
+  updatedRecipes = filteredRecipes.filter (recipe => recipe._id !== id)
+  setFilteredRecipes(updatedRecipes)
+  try {
+    const response = await fetch(`http://localhost:5000/api/recipes/delete/${id}`, {
+      method: 'DELETE',
+    });
 
+    if (response.ok) {
+      console.log('Rețeta a fost ștearsă cu succes.');
+    } else {
+      console.error('Eroare la ștergerea rețetei.');
+    }
+  } catch (error) {
+    console.error('Eroare:', error);
+  }
+ }
   const toggleSortDropdown = () => {
     setIsSortOpen(!isSortOpen);
     if (isFilterOpen) setIsFilterOpen(false);
@@ -50,7 +74,10 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, []);
-
+  useEffect(()=> {
+    sortRecipes(sortMode)
+    console.log("DA")
+  },[mod])
   const [checkboxes, setCheckboxes] = useState([false, false, false, false, false]);
 
   const handleCheckboxChange = (index) => {
@@ -62,14 +89,14 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
   const startOptions = [{}, {}, {}, {}, {}];
   const deleteButton = (numeReteta) => {
     if(userName==numeReteta) return (
-      <button className={`add-recipe-button login stergeReteta add recenzie ${isMobile && 'mobile'}`}>
+      <button onClick={ () => handleDelete(selectedRecipe._id)} className={`add-recipe-button login stergeReteta add recenzie ${isMobile && 'mobile'}`}>
         Sterge reteta
       </button>
     )
-    else console.log(userName)
   }
   useEffect(() => {
     const fetchRecipes = async () => {
+      setIsLoading(true); 
       try {
         const response = await fetch('http://localhost:5000/api/get-recipes');
         const data = await response.json();
@@ -77,6 +104,8 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
         setSearchedRecipes(data); // Inițial, setăm toate rețetele
       } catch (error) {
         console.error('Eroare la preluarea rețetelor:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchRecipes();
@@ -101,6 +130,7 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
     let filtered = [...searchedRecipes]; 
     if (!checkboxes.some(isChecked => isChecked)) {
       setFilteredRecipes(searchedRecipes);
+      setMod(mod==1?0:1)
       return;
     }
 
@@ -109,14 +139,15 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
     );
 
     setFilteredRecipes(filtered); 
+    setMod(mod==1?0:1)
   };
 
   useEffect(() => {
     filterRecipesByRating();
   }, [checkboxes, recipes, searchedRecipes]); 
   const sortRecipes = (option) => {
-    let sorted = [...searchedRecipes];
-
+    let sorted = [...filteredRecipes];
+    setSortMode(option)
     switch (option) {
       case 'Top rated':
         sorted = sorted.sort((a, b) => b.ratings - a.ratings);
@@ -134,7 +165,7 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
         break;
     }
 
-    setSearchedRecipes(sorted);
+    setFilteredRecipes(sorted);
   };
 
   const handleSortSelection = (option) => {
@@ -148,7 +179,6 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
   };
   const handleRecipeClick = (recipe) => {
     setSelectedRecipe(recipe);
-    console.log(recipe)
   };
   return (
     <div className={`${menuOpen && 'blur'}`}>
@@ -227,6 +257,7 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
           </div>
 
           <div className={`grid-container ${isMobile && 'mobil'}`}>
+          {isLoading && <div className='spinner'></div>}
             {filteredRecipes.map((recipe, index) => (
               <div className={`grid-item ${isMobile && 'mobil'}`} onClick={() => handleRecipeClick(recipe)} key={index}>
                 <img src={`http://localhost:5000${recipe.image}`} alt="recipe" />
