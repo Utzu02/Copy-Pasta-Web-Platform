@@ -93,7 +93,7 @@ const Profile = ({menuOpen,isMobile,UID }) => {
                         <textarea
                 className={`nickname ${isMobile && 'mobil'} p1 noresize`}
                 name="email"
-                maxlength="35"
+                maxlength="40"
                 value={informatiiProfil.email}
                 onChange={handleInputChange}
               /></div>
@@ -124,7 +124,7 @@ const Profile = ({menuOpen,isMobile,UID }) => {
                         <textarea
                 className={`nickname ${isMobile && 'mobil'} noresize w-60 p1`}
                 name="college"
-                maxlength="30"
+                maxlength="40"
                 value={informatiiProfil.college}
                 onChange={handleInputChange}
               />

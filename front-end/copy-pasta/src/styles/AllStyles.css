@@ -40,8 +40,12 @@ p {
 .p1 {
     margin-left: 1vw;
 }
+
 textarea:focus-visible {
     outline: none;
+}
+textarea:placeholder-shown {
+    font-family: Arial, Helvetica, sans-serif;
 }
 .w-60 {
     width: 60% !important;

@@ -139,7 +139,21 @@ app.delete('/api/recipes/delete/:id', async (req, res) => {
     res.status(500).json({ message: 'Eroare la ștergerea rețetei.', error });
   }
 });
-
+app.put('/api/recipes/update/:id', async (req, res) => {
+  const { id } = req.params;
+  const updatedData = req.body;
+  delete updatedData.image
+  try {
+    const updatedRecipe = await Recipe.findByIdAndUpdate(id, updatedData, { new: true });
+    if (!updatedRecipe) {
+      return res.status(404).json({ message: 'Rețeta nu a fost găsită.' });
+    }
+    res.status(200).json({ message: 'Rețeta a fost actualizată cu succes.', updatedRecipe });
+  } catch (error) {
+    console.error('Eroare la actualizarea rețetei:', error);
+    res.status(500).json({ message: 'Eroare la actualizarea rețetei.', error });
+  }
+});
 const getImage = (imageBuffer) => {
     if (imageBuffer) {
       return {

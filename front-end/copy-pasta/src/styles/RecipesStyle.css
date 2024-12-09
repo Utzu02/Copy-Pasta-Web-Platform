@@ -378,10 +378,12 @@ input[type="checkbox"]:checked + label::after {
 }
 .add-recipe-button.login.add.recenzie.stergeReteta {
   background-color: red !important;
-  width: 5vw !important;
+  width: 6vw !important;
+  padding-top: 1.5vh;
+  padding-bottom: 1.5vh;
   border-radius: 15px !important;
   position: absolute !important;
-  left: 73vw;
+  left: 70vw;
   bottom: 1vw;
 }
 .stergeReteta:hover {

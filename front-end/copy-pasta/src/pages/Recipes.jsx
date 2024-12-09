@@ -18,7 +18,7 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [finalRating, setFinalRating] = useState(0)
   const [isLoading, setIsLoading] = useState(false); 
-  const [sortMode, setSortMode] = useState('');
+  const [sortMode, setSortMode] = useState('Top rated');
   const [mod,setMod] = useState("")
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -123,8 +123,40 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
   const handleMouseClick = () => {
     setFinalRating(hoveredRating)
   }
-  const handleSubmit = () => {
-    
+  const updateRecipe = async (id, updatedData) => {
+  try {
+    const response = await fetch(`http://localhost:5000/api/recipes/update/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedData),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Rețeta actualizată:', data.updatedRecipe);
+      // Actualizează local lista de rețete
+      setRecipes((prevRecipes) =>
+        prevRecipes.map((recipe) =>
+          recipe._id === id ? { ...recipe, ...updatedData } : recipe
+        )
+      );
+    sortRecipes(sortMode)
+    } else {
+      console.error('Eroare la actualizarea rețetei.');
+    }
+  } catch (error) {
+    console.error('Eroare:', error);
+  }
+};
+  const handleSubmit = (recipe,rating) => {
+    const reteta = recipe
+    if(reteta.nrratinguri==0) reteta.ratings=0
+    reteta.ratings+=rating
+    reteta.nrratinguri++;
+
+    updateRecipe(reteta._id,reteta)
   }
   const filterRecipesByRating = () => {
     let filtered = [...searchedRecipes]; 
@@ -135,9 +167,8 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
     }
 
     filtered = filtered.filter(recipe =>
-      checkboxes.some((isChecked, index) => isChecked && recipe.ratings === 5 - index)
+      checkboxes.some((isChecked, index) => isChecked && Aprox((recipe.nrratinguri==0)?recipe.ratings:recipe.ratings/recipe.nrratinguri) === 5 - index)
     );
-
     setFilteredRecipes(filtered); 
     setMod(mod==1?0:1)
   };
@@ -150,10 +181,10 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
     setSortMode(option)
     switch (option) {
       case 'Top rated':
-        sorted = sorted.sort((a, b) => b.ratings - a.ratings);
+        sorted = sorted.sort((a, b) =>{return(((b.nrratinguri==0)?b.ratings:b.ratings/b.nrratinguri) - ((a.nrratinguri==0)?a.ratings:a.ratings/a.nrratinguri))});
         break;
       case 'Worst rated':
-        sorted = sorted.sort((a, b) => a.ratings - b.ratings);
+        sorted = sorted.sort((a, b) => {return(-((b.nrratinguri==0)?b.ratings:b.ratings/b.nrratinguri) + ((a.nrratinguri==0)?a.ratings:a.ratings/a.nrratinguri))});
         break;
       case 'Most rated':
         sorted = sorted.sort((a, b) => b.nrratinguri - a.nrratinguri);
@@ -173,7 +204,10 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
 
     setFilteredRecipes(sorted);
   };
-
+  function Aprox (a) {
+    if(a+0.4>(Math.floor(a+1))) return Math.floor(a+1)
+    else return Math.floor(a)
+  }
   const handleSortSelection = (option) => {
     setSortOption(option);
     setIsSortOpen(false);
@@ -275,8 +309,8 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
                     {recipe.title}
                   </p>
                   <div className='stars'>
-                    {"★".repeat(recipe.ratings)}
-                    {"☆".repeat(5 - recipe.ratings)}
+                    {"★".repeat(Aprox((recipe.nrratinguri==0)?recipe.ratings:recipe.ratings/recipe.nrratinguri))}
+                    {"☆".repeat(5 - Aprox((recipe.nrratinguri==0)?recipe.ratings:recipe.ratings/recipe.nrratinguri))}
                   </div>
                   <p className='informatiisuplimentare'>Nr ratinguri</p>
                   <p className='nrratinguri'>{recipe.nrratinguri}</p>
@@ -299,8 +333,8 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
                 <h2>{selectedRecipe.title}</h2>
                 <div>
                   <p className='rateRecipe'>
-                    {"★".repeat(selectedRecipe.ratings)}
-                    {"☆".repeat(5 - selectedRecipe.ratings)}
+                    {"★".repeat(Aprox((selectedRecipe.nrratinguri==0)?selectedRecipe.ratings:selectedRecipe.ratings/selectedRecipe.nrratinguri))}
+                    {"☆".repeat(5 - Aprox((selectedRecipe.nrratinguri==0)?selectedRecipe.ratings:selectedRecipe.ratings/selectedRecipe.nrratinguri))}
                   </p>
                 </div>
                 <p>Nr ratinguri </p><p>{selectedRecipe.nrratinguri}</p>
@@ -324,7 +358,7 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
                 <button
                   type="submit"
                   className={`add-recipe-button login add recenzie ${isMobile && 'mobile'}`}
-                  onClick={handleSubmit(finalRating)}
+                  onClick={() => handleSubmit(selectedRecipe,finalRating)}
                 >
                   Submit
                 </button>

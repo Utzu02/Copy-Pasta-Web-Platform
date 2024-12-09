@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import "./CarouselStyle.css"; // Include stilurile din secțiunea CSS
+import "./CarouselStyle.css"; 
 import "./../styles/AllStyles.css"
 import "./../styles/Homepage.css"
 import ex1 from '../assets/ex1.png'
@@ -15,23 +15,22 @@ const Carousel = () => {
       try {
         const response = await fetch('http://localhost:5000/api/get-recipes');
         const data = await response.json();
-        setRecipes(data); // Stochează rețetele în state
+        setRecipes(data); 
         sortRecipes(data);
       } catch (error) {
         console.error('Eroare la preluarea rețetelor:', error);
       }
     };
     fetchRecipes();
-  }, []); // Array de dependențe gol => se execută o singură dată, la montarea componentei
+  }, []); 
 
 
   const sortRecipes = (newRecipes) => {
-    const sorted = [...newRecipes].sort((a,b) => b.ratings - a.ratings)
+    const sorted = [...newRecipes].sort((a,b) => {return(((b.nrratinguri==0)?b.ratings:b.ratings/b.nrratinguri) - ((a.nrratinguri==0)?a.ratings:a.ratings/a.nrratinguri))})
     setRecipes(sorted.slice(0, 3));
   }
   const totalSlides = 3;
 
-  // Butoanele pentru navigare
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % totalSlides);
   };
@@ -39,7 +38,10 @@ const Carousel = () => {
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
   };
-
+  function Aprox (a) {
+    if(a+0.4>(Math.floor(a+1))) return Math.floor(a+1)
+    else return Math.floor(a)
+  }
   return (
     <div className="carousel-container">
       <h2 className="carousel-title">Top rated recipes</h2>
@@ -61,8 +63,8 @@ const Carousel = () => {
                   {recipe.title}
                 </p>
                 <div className="ratings">
-                  {"★".repeat(recipe.ratings)}
-                  {"☆".repeat(5 - recipe.ratings)}
+                    {"★".repeat(Aprox((recipe.nrratinguri==0)?recipe.ratings:recipe.ratings/recipe.nrratinguri))}
+                    {"☆".repeat(5 - Aprox((recipe.nrratinguri==0)?recipe.ratings:recipe.ratings/recipe.nrratinguri))}
                 </div>
                 <p className='informatiisuplimentare'>Nr ratinguri</p>
                 <p className="nrrating">{recipe.nrratinguri}</p>

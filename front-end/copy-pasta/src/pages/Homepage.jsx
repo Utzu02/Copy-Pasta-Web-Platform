@@ -27,10 +27,13 @@ const Homepage = ({menuOpen,isMobile }) => {
       };
       fetchRecipes();
     }, []); // Array de dependențe gol => se execută o singură dată, la montarea componentei
-  
+    function Aprox (a) {
+        if(a+0.4>(Math.floor(a+1))) return Math.floor(a+1)
+        else return Math.floor(a)
+      }
   
     const sortRecipes = (newRecipes) => {
-      const sorted = [...newRecipes].sort((a,b) => b.ratings - a.ratings)
+      const sorted = [...newRecipes].sort((a,b) => {return(((b.nrratinguri==0)?b.ratings:b.ratings/b.nrratinguri) - ((a.nrratinguri==0)?a.ratings:a.ratings/a.nrratinguri))})
       setRecipes(sorted.slice(0, 3));
     }
     if (!isMobile)
@@ -53,8 +56,8 @@ const Homepage = ({menuOpen,isMobile }) => {
                                         {recipe.title}
                                     </p>
                                     <div className='stars'>
-                                        {"★".repeat(recipe.ratings)}
-                                        {"☆".repeat(5 - recipe.ratings)}
+                    {"★".repeat(Aprox((recipe.nrratinguri==0)?recipe.ratings:recipe.ratings/recipe.nrratinguri))}
+                    {"☆".repeat(5 - Aprox((recipe.nrratinguri==0)?recipe.ratings:recipe.ratings/recipe.nrratinguri))}
                                     </div>
                                     <p className='informatiisuplimentare'>Nr ratinguri</p>
                                     <p>{recipe.nrratinguri}</p>
