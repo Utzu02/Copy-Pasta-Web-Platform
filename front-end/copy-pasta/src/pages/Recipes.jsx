@@ -161,6 +161,12 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
       case 'Least rated':
         sorted = sorted.sort((a, b) => a.nrratinguri - b.nrratinguri);
         break;
+      case 'Name':
+        sorted = sorted.sort((a, b) =>{
+          if(b.title<a.title) return 1;
+          else return -1;
+        });
+        break;
       default:
         break;
     }
@@ -251,6 +257,8 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
                   <p onClick={() => handleSortSelection('Most rated')}>Most rated</p>
                   <img className="linieoriz" src={linieorizontala}></img>
                   <p onClick={() => handleSortSelection('Least rated')}>Least rated</p>
+                  <img className="linieoriz" src={linieorizontala}></img>
+                  <p onClick={() => handleSortSelection('Name')}>Name</p>
                 </div>
               )}
             </div>
