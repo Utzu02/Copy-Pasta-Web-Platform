@@ -228,7 +228,6 @@ const Register = ({ menuOpen, isMobile}) => {
               {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               className={`add-recipe-button login signup add ${isMobile && 'mobileReg'}`}

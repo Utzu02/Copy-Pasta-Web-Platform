@@ -51,7 +51,6 @@ function App() {
   }, [UID]);
   const [isMobile, setIsMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-
   const handleMenuToggle = (isOpen) => {
     setMenuOpen(isOpen);
   };
@@ -75,7 +74,7 @@ function App() {
       {<Navbar isMobile={isMobile} menuOpen={menuOpen} onToggleMenu={handleMenuToggle} isLoggedIn={isLoggedIn}/>}
       <Routes>
         <Route path="/" element={<Home menuOpen={menuOpen} isMobile={isMobile}/>} />
-        <Route path="/recipes" element={<Recipes menuOpen={menuOpen} isMobile={isMobile}/>} />
+        <Route path="/recipes" element={<Recipes menuOpen={menuOpen} userName={name} isMobile={isMobile}/>} />
         <Route path="/profile" element={isLoggedIn?<Profile menuOpen={menuOpen} isMobile={isMobile} UID={UID}/>:<Navigate to='/login' />} />
         <Route path="/register" element={!isLoggedIn?<Register menuOpen={menuOpen} isMobile={isMobile}/>:<Navigate to='/'/>} />
         <Route path="/login" element={!isLoggedIn?<Login menuOpen={menuOpen} isMobile={isMobile}/>:<Navigate to='/'/>} />

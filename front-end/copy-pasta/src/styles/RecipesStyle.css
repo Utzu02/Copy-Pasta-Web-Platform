@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 .grid-container {
   display: grid;
   grid-template-rows: auto;
@@ -288,6 +291,26 @@ input[type="checkbox"]:checked + label::after {
   margin-top: 3vh;
   gap: 3vw;
   margin-left: 3vw;
+  align-items: center !important;
+}
+.modal-content h3 {
+  text-align: left;
+  font-family: Mon;
+  font-weight: 500;
+  padding-top: 4vh;
+  font-family: 'Montserrat', sans-serif;
+  color: #009C41;
+}
+.rate {
+  position: absolute;
+  right: 5vw;
+}
+.rate h2 {
+  font-weight: 500;
+}
+.rateRecipe {
+  font-size: 36px;
+  color: #FFC500;
 }
 .close-button {
   position: absolute;
@@ -299,11 +322,35 @@ input[type="checkbox"]:checked + label::after {
   cursor: pointer;
 }
 .modal-content .linieoriz {
-  height: auto;
-  width: 100%;
+  margin-top: .5vh;
+  width: 80vw !important;
+  stroke-width: .7;
 }
 .grid-item {
   cursor: pointer;
+}
+.descriereinf {
+  justify-content: center;
+  align-items: start !important;
+}
+.descriereretetamodal {
+  padding-top: 2.5vh;
+}
+.descriereretetamodal p {
+  text-align: start;
+}
+.add-recipe-button.login.add.recenzie {
+  font-size: 1rem;
+  margin-top: 2vh;
+  border-radius: 25px;
+  font-weight: 600;
+  width: 4vw;
+  padding-left: 1.5vw !important;
+  padding-right: 1.5vw !important;
+}
+.rate.rateRecipe span:hover {
+  transform: scale(1.2); /* Mărește steaua la hover */
+  transition: transform 0.2s;
 }
 
 @media screen and (max-width: 1400px)
@@ -317,6 +364,7 @@ input[type="checkbox"]:checked + label::after {
   .dropdown {
     width: 15vw;
   }
+  .add-recipe-button.login.add.recenzie {width: 6vw;}
 }
 @media screen and (max-width: 1200px) {
   .grid-container {
@@ -328,6 +376,7 @@ input[type="checkbox"]:checked + label::after {
 }
 @media screen and (max-width: 1000px)
 {
+  .add-recipe-button.login.add.recenzie {width: 8vw;}
   .filter-button, .sort-button {
     width: 19vw;
   }
@@ -341,6 +390,7 @@ input[type="checkbox"]:checked + label::after {
 }
 @media screen and (max-width: 800px)
 {
+  .add-recipe-button.login.add.recenzie {width: 10vw;}
   .filter-button, .sort-button {
     width: 23vw;
   }
@@ -358,6 +408,7 @@ input[type="checkbox"]:checked + label::after {
 }
 @media screen and (max-width: 600px)
 {
+  .add-recipe-button.login.add.recenzie {width: 14vw;}
   .search-container {
     width: 75vw;
   }
@@ -376,6 +427,7 @@ input[type="checkbox"]:checked + label::after {
 }
 @media screen and (max-width: 500px)
 {
+  .add-recipe-button.login.add.recenzie {width: 18vw;}
   .search-container {
     width: 85vw;
   }

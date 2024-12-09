@@ -5,7 +5,7 @@ import '../styles/RecipesStyle.css';
 import linieorizontala from './../assets/linie-orizontala.svg';
 import Footer from '../components/Footer';
 
-const Recipes = ({ menuOpen, isMobile }) => {
+const Recipes = ({ menuOpen, userName, isMobile }) => {
 
   const [recipes, setRecipes] = useState([]);
   const [searchedRecipes, setSearchedRecipes] = useState([]);
@@ -15,7 +15,7 @@ const Recipes = ({ menuOpen, isMobile }) => {
   const [sortOption, setSortOption] = useState('');
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
-
+  const [finalRating, setFinalRating] = useState(0)
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
     search(e.target.value)
@@ -60,7 +60,13 @@ const Recipes = ({ menuOpen, isMobile }) => {
   };
 
   const startOptions = [{}, {}, {}, {}, {}];
-
+  const deleteButton = (numeReteta) => {
+    if(userName==numeReteta) return (
+      <button className={`add-recipe-button login add recenzie ${isMobile && 'mobile'}`}>
+        Sterge reteta
+      </button>
+    )
+  }
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
@@ -75,31 +81,40 @@ const Recipes = ({ menuOpen, isMobile }) => {
     fetchRecipes();
   }, []);
 
+  const [hoveredRating, setHoveredRating] = useState(0); 
 
-  // Funcția de filtrare
+  const handleMouseEnter = (index) => {
+    setHoveredRating(index + 1); 
+  };
+  
+  const handleMouseLeave = () => {
+    setHoveredRating(0); 
+  };
+  const handleMouseClick = () => {
+    setFinalRating(hoveredRating)
+  }
+  const handleSubmit = () => {
+    
+  }
   const filterRecipesByRating = () => {
-    let filtered = [...searchedRecipes]; // Facem o copie a rețetelor
+    let filtered = [...searchedRecipes]; 
     if (!checkboxes.some(isChecked => isChecked)) {
       setFilteredRecipes(searchedRecipes);
       return;
     }
 
-    // Reuniunea filtrează rețetele care au ratingurile selectate
     filtered = filtered.filter(recipe =>
       checkboxes.some((isChecked, index) => isChecked && recipe.ratings === 5 - index)
     );
 
-    setFilteredRecipes(filtered); // Setăm rețetele filtrate
+    setFilteredRecipes(filtered); 
   };
 
-  // Folosim un useEffect pentru a filtra rețetele de fiecare dată când checkbox-urile se schimbă
   useEffect(() => {
     filterRecipesByRating();
-  }, [checkboxes, recipes, searchedRecipes]); // Se reexecută la schimbarea checkbox-urilor sau a listei de rețete
-
-  // Funcția pentru sortare
+  }, [checkboxes, recipes, searchedRecipes]); 
   const sortRecipes = (option) => {
-    let sorted = [...searchedRecipes]; // Facem o copie a rețetelor filtrate
+    let sorted = [...searchedRecipes];
 
     switch (option) {
       case 'Top rated':
@@ -118,21 +133,20 @@ const Recipes = ({ menuOpen, isMobile }) => {
         break;
     }
 
-    setSearchedRecipes(sorted); // Setăm rețetele sortate
+    setSearchedRecipes(sorted);
   };
 
-  // Funcția care se apelează când se alege o opțiune de sortare
   const handleSortSelection = (option) => {
-    setSortOption(option); // Setăm opțiunea de sortare selectată
-    setIsSortOpen(false);  // Închide dropdown-ul după selecție
-    sortRecipes(option); // Apelăm funcția de sortare
+    setSortOption(option);
+    setIsSortOpen(false);
+    sortRecipes(option);
   };
 
   const closeModal = () => {
-    setSelectedRecipe(null); // Închidem modalul
+    setSelectedRecipe(null);
   };
   const handleRecipeClick = (recipe) => {
-    setSelectedRecipe(recipe); // Setăm rețeta selectată
+    setSelectedRecipe(recipe);
     console.log(recipe)
   };
   return (
@@ -241,19 +255,49 @@ const Recipes = ({ menuOpen, isMobile }) => {
             <button className="close-button" onClick={closeModal}>✖</button>
             <div className='flex flex-row modal-inf'>
               <img src={`http://localhost:5000${selectedRecipe.image}`} alt={selectedRecipe.title} />
-              <div className='flex flex-col'>
+              <div className='flex flex-col descriereinf'>
                 <h2>{selectedRecipe.title}</h2>
-                <p><strong>Author:</strong> {selectedRecipe.author}</p>
                 <div>
-                  <strong>Rating:</strong>{" "}
-                  {"★".repeat(selectedRecipe.ratings)}
-                  {"☆".repeat(5 - selectedRecipe.ratings)}
+                  <p className='rateRecipe'>
+                    {"★".repeat(selectedRecipe.ratings)}
+                    {"☆".repeat(5 - selectedRecipe.ratings)}
+                  </p>
                 </div>
+                <p>Nr ratinguri </p><p>{selectedRecipe.nrratinguri}</p>
+                <p>Author:</p><p>{selectedRecipe.author}</p>
+              </div>
+              <div className='flex flex-col rate'><h2>Rate this recipe</h2>
+                <p className='rateRecipe pointer'>
+                  {Array(5)
+                    .fill()
+                    .map((_, index) => (
+                      <span
+                        key={index}
+                        onMouseEnter={() => handleMouseEnter(index)} 
+                        onMouseLeave={handleMouseLeave} 
+                        onClick={handleMouseClick}
+                      >
+                        {index < (hoveredRating ||finalRating)? "★" : "☆"}
+                      </span>
+                    ))}
+                </p>
+                <button
+                  type="submit"
+                  className={`add-recipe-button login add recenzie ${isMobile && 'mobile'}`}
+                  onClick={handleSubmit(finalRating)}
+                >
+                  Submit
+                </button>
               </div>
             </div>
-            <h3>Description</h3>
-            <img className="linieoriz" src={linieorizontala} alt="linie"></img>
-            <p>{selectedRecipe.description}</p>
+            <div className='flex'><div className='w-75'><h3>Description</h3></div></div>
+            <svg viewBox="0 0 292 2" xmlns="http://www.w3.org/2000/svg">
+              <line y1="1" x2="292" y2="1" stroke="#009C41" stroke-width="2" className='linieoriz' />
+            </svg>
+
+
+            <div className='flex descriereretetamodal'><div className='w-75' ><p>{selectedRecipe.description}</p></div></div>
+            {deleteButton(selectedRecipe.name)}
           </div>
         </div>
       )}

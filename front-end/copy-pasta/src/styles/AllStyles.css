@@ -46,7 +46,15 @@ textarea:focus-visible {
 .w-60 {
     width: 60% !important;
 }
-
+.w-75 {
+    width: 75vw  !important;
+}
+.w-85 {
+    width: 85vw !important;
+}
+.pointer {
+    cursor: pointer;
+}
 input:focus-visible {
     outline: none;
 }
