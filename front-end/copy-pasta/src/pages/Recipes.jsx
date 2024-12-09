@@ -25,7 +25,6 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
     search(e.target.value)
   };
   const search = (item) => {
-    console.log(item)
     let searched = [...recipes];
     searched = searched.filter(recipe => recipe.title.toLowerCase().startsWith(item.toLowerCase(), 0));
     setSearchedRecipes(searched);
@@ -76,7 +75,6 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
   }, []);
   useEffect(()=> {
     sortRecipes(sortMode)
-    console.log("DA")
   },[mod])
   const [checkboxes, setCheckboxes] = useState([false, false, false, false, false]);
 
@@ -100,8 +98,8 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
       try {
         const response = await fetch('http://localhost:5000/api/get-recipes');
         const data = await response.json();
-        setRecipes(data); // Stochează rețetele în state
-        setSearchedRecipes(data); // Inițial, setăm toate rețetele
+        setRecipes(data); 
+        setSearchedRecipes(data); 
       } catch (error) {
         console.error('Eroare la preluarea rețetelor:', error);
       } finally {
@@ -120,8 +118,8 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
   const handleMouseLeave = () => {
     setHoveredRating(0); 
   };
-  const handleMouseClick = () => {
-    setFinalRating(hoveredRating)
+  const handleMouseClick = (index) => {
+    setFinalRating(index+1)
   }
   const updateRecipe = async (id, updatedData) => {
   try {
@@ -155,8 +153,8 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
     if(reteta.nrratinguri==0) reteta.ratings=0
     reteta.ratings+=rating
     reteta.nrratinguri++;
-
     updateRecipe(reteta._id,reteta)
+    setFinalRating(0)
   }
   const filterRecipesByRating = () => {
     let filtered = [...searchedRecipes]; 
@@ -340,7 +338,7 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
                 <p>Nr ratinguri </p><p>{selectedRecipe.nrratinguri}</p>
                 <p>Author:</p><p>{selectedRecipe.author}</p>
               </div>
-              <div className='flex flex-col rate'><h2>Rate this recipe</h2>
+              {!isMobile&&<div className='flex flex-col rate'><h2>Rate this recipe</h2>
                 <p className='rateRecipe pointer'>
                   {Array(5)
                     .fill()
@@ -349,7 +347,7 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
                         key={index}
                         onMouseEnter={() => handleMouseEnter(index)} 
                         onMouseLeave={handleMouseLeave} 
-                        onClick={handleMouseClick}
+                        onClick={() => handleMouseClick(index)}
                       >
                         {index < (hoveredRating ||finalRating)? "★" : "☆"}
                       </span>
@@ -362,7 +360,7 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
                 >
                   Submit
                 </button>
-              </div>
+              </div>}
             </div>
             <div className='flex'><div className='w-75'><h3>Description</h3></div></div>
             <svg viewBox="0 0 292 2" xmlns="http://www.w3.org/2000/svg">
@@ -371,6 +369,29 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
 
 
             <div className='flex descriereretetamodal'><div className='w-75' ><p>{selectedRecipe.description}</p></div></div>
+            {isMobile&&<div className='flex flex-col rate mobile'><h2>Rate this recipe</h2>
+                <p className='rateRecipe pointer'>
+                  {Array(5)
+                    .fill()
+                    .map((_, index) => (
+                      <span
+                        key={index}
+                        onMouseEnter={() => handleMouseEnter(index)} 
+                        onMouseLeave={handleMouseLeave} 
+                        onClick={() => handleMouseClick(index)}
+                      >
+                        {index < (hoveredRating ||finalRating)? "★" : "☆"}
+                      </span>
+                    ))}
+                </p>
+                <button
+                  type="submit"
+                  className={`add-recipe-button login add recenzie ${isMobile && 'mobile'}`}
+                  onClick={() => handleSubmit(selectedRecipe,finalRating)}
+                >
+                  Submit
+                </button>
+              </div>}
             {deleteButton(selectedRecipe.author)}
           </div>
         </div>

@@ -58,13 +58,10 @@ function App() {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-    // Verificăm dimensiunea la montare
     handleResize();
 
-    // Adăugăm un event listener pentru redimensionare
     window.addEventListener("resize", handleResize);
 
-    // Eliminăm event listener la demontare
     return () => {
       window.removeEventListener("resize", handleResize);
     };

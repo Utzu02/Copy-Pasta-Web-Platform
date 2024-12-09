@@ -329,8 +329,13 @@ input[type="checkbox"]:checked + label::after {
   color: #009C41;
 }
 .rate {
+  margin-top: 10vh;
   position: absolute;
   right: 5vw;
+}
+.rate.mobile {
+  right: 0;
+  position: relative;
 }
 .rate h2 {
   font-weight: 500;
@@ -386,8 +391,10 @@ input[type="checkbox"]:checked + label::after {
   transition: transform 0.2s;
 }
 .modal-content.mobile .add-recipe-button.login.add.recenzie.stergeReteta {
+  margin-top: 10vh;
   bottom: 5vh;
-  left: 72vw;
+  left: 0;
+  position: relative !important;
 }
 .add-recipe-button.login.add.recenzie.stergeReteta {
   background-color: red !important;
@@ -399,6 +406,7 @@ input[type="checkbox"]:checked + label::after {
   left: 70vw;
   bottom: 4vh;
 }
+
 .stergeReteta:hover {
   border: none !important;
 }
@@ -489,7 +497,7 @@ input[type="checkbox"]:checked + label::after {
 }
 @media screen and (max-width: 500px)
 {
-  .add-recipe-button.login.add.recenzie,.add-recipe-button.login.add.recenzie.stergeReteta {width: 22vw !important;}
+  .add-recipe-button.login.add.recenzie,.add-recipe-button.login.add.recenzie.stergeReteta {width: 25vw !important;}
   .search-container {
     width: 85vw;
   }

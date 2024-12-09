@@ -19,14 +19,14 @@ const Homepage = ({menuOpen,isMobile }) => {
         try {
           const response = await fetch('http://localhost:5000/api/get-recipes');
           const data = await response.json();
-          setRecipes(data); // Stochează rețetele în state
+          setRecipes(data); 
           sortRecipes(data);
         } catch (error) {
           console.error('Eroare la preluarea rețetelor:', error);
         }
       };
       fetchRecipes();
-    }, []); // Array de dependențe gol => se execută o singură dată, la montarea componentei
+    }, []); 
     function Aprox (a) {
         if(a+0.4>(Math.floor(a+1))) return Math.floor(a+1)
         else return Math.floor(a)

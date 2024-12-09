@@ -90,6 +90,7 @@ textarea.nickname {
   color: white;
   height: 100%;
   overflow-y: hidden;
+  max-height: 15vh;
   field-sizing: content;
   resize: none;
   

@@ -8,7 +8,15 @@ import Footer from '../components/Footer';
 const Profile = ({menuOpen,isMobile,UID }) => {
   const [error, setError] = useState('');
   const [informatiiProfil, updateInformatiiProfil] = useState([])
-
+  const [nume,setNume] = useState('');
+  const [prenume,setPrenume] = useState('');
+  useEffect (() => {
+    if(informatiiProfil.name) 
+    {
+        setNume(informatiiProfil.name.split(' ').slice(0,2).join(' '))
+        setPrenume(informatiiProfil.name.split(' ').slice(2,3).join(' '))
+    }
+  },[informatiiProfil.name])
   useEffect (() => {
     const handleSearch = async () => {
         setError('');
@@ -73,14 +81,25 @@ const Profile = ({menuOpen,isMobile,UID }) => {
                         </svg>
                     </div>}
                     {isMobile&&<div className={`content-nickname ${isMobile&&'mobil'}`}>
-                        <p className={`nickname ${isMobile&&'mobil'}`}>First name:</p>
-                        
+                    <textarea
+                className={`nickname ${isMobile && 'mobil'} noresize`}
+                name="nume"
+                maxlength="35"
+                value={nume}
+                onChange={handleInputChange}
+              />
                         <svg width="100%" height="1" viewBox="0 0 412 1" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                             <line y1="0.5" x2="412" y2="0.5" stroke="white" />
                         </svg>
                     </div>}
                     {isMobile&&<div className={`content-nickname ${isMobile&&'mobil'}`}>
-                        <p className={`nickname ${isMobile&&'mobil'}`}>Last name:</p>
+                    <textarea
+                className={`nickname ${isMobile && 'mobil'} noresize`}
+                name="prenume"
+                maxlength="35"
+                value={prenume}
+                onChange={handleInputChange}
+              />
                         <svg width="100%" height="1" viewBox="0 0 412 1" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                             <line y1="0.5" x2="412" y2="0.5" stroke="white" />
                         </svg>

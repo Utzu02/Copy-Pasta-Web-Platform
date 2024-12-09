@@ -9,11 +9,10 @@ import Footer from '../components/Footer';
 const AddRecipes = ({ menuOpen, isMobile,UID,userName }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [image, setImage] = useState(null);  // Stocăm fișierul separat
+    const [image, setImage] = useState(null);  
     const [errors, setErrors] = useState({});
-    const navigate = useNavigate(); // Folosim navigate pentru redirecționare
+    const navigate = useNavigate(); 
 
-    // Handler pentru schimbarea valorilor în inputuri
     const handleChange = (e) => {
         const { name, value } = e.target;
         if (name === 'title') {
@@ -23,15 +22,13 @@ const AddRecipes = ({ menuOpen, isMobile,UID,userName }) => {
         }
     };
 
-    // Handler pentru schimbarea imaginii
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setImage(file);  // Actualizează starea cu fișierul
+            setImage(file);  
         }
     };
 
-    // Validarea formularului
     const validate = () => {
         const newErrors = {};
         if (!title) newErrors.title = 'Nu ai completat numele rețetei!';
@@ -40,7 +37,6 @@ const AddRecipes = ({ menuOpen, isMobile,UID,userName }) => {
         return newErrors;
     };
 
-    // Trimiterea formularului
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -52,32 +48,25 @@ const AddRecipes = ({ menuOpen, isMobile,UID,userName }) => {
         setErrors({});
 
         try {
-            // Creăm un obiect FormData
             const formDataToSend = new FormData();
             formDataToSend.append('title', title);
             formDataToSend.append('description', description);
             formDataToSend.append('author', userName);
 
-            // Dacă fișierul există, îl adăugăm în FormData
             if (image) {
-                formDataToSend.append('image', image); // Fișierul
+                formDataToSend.append('image', image); 
             }
             formDataToSend.append('userID', UID);
             
-            console.log(title, description, image);
-            for (let [key, value] of formDataToSend.entries()) {
-                console.log(`${key}:`, value);
-            }
-            // Aici se trimite request-ul POST către server
             const response = await fetch('http://localhost:5000/api/recipes', {
                 method: 'POST',
-                body: formDataToSend, // Trimite FormData
+                body: formDataToSend, 
             });
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('Rețeta adăugată cu succes:', data);
-                navigate('/recipes'); // Redirecționează utilizatorul la pagina cu rețete
+                console.log('Rețeta adăugată cu succes:');
+                navigate('/recipes'); 
             } else {
                 const errorData = await response.json();
                 console.error('Eroare la adăugarea rețetei:', errorData);
@@ -116,7 +105,7 @@ const AddRecipes = ({ menuOpen, isMobile,UID,userName }) => {
                             <textarea
                                 name="description"
                                 placeholder="Description:"
-                                maxlength="270"
+                                maxlength="1000"
                                 value={description}
                                 onChange={handleChange}
                                 className={`nickname ${isMobile && 'mobil'}`}

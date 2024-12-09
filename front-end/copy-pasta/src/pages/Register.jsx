@@ -63,7 +63,7 @@ const Register = ({ menuOpen, isMobile}) => {
       }
 
       const data = await response.json();
-      console.log('Înregistrare reușită:', data);
+      console.log('Înregistrare reușită:');
 
       setFormData({
         nume: '',
@@ -227,7 +227,7 @@ const Register = ({ menuOpen, isMobile}) => {
             <button
               type="submit"
               className={`add-recipe-button login signup add ${isMobile && 'mobileReg'}`}
-              disabled={isLoading} // Dezactivează butonul în timpul încărcării
+              disabled={isLoading} 
             >
               {isLoading ? 'Înregistrare în curs...' : 'Sign Up'}
             </button>
