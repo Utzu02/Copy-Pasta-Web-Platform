@@ -308,6 +308,9 @@ input[type="checkbox"]:checked + label::after {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
 }
+.modal-content.mobile img {
+  padding-top: 5vh;
+}
 .modal-content img {
   height: 20vh;
 }
@@ -336,13 +339,19 @@ input[type="checkbox"]:checked + label::after {
   font-size: 36px;
   color: #FFC500;
 }
+.modal-content.mobile .close-button {
+  top: 5vh;
+  right: .5vw;
+  padding: 1vw 1vh;
+}
 .close-button {
+
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 1vh;
+  right: 1vw;
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 1.6rem;
   cursor: pointer;
 }
 .modal-content .linieoriz {
@@ -376,6 +385,10 @@ input[type="checkbox"]:checked + label::after {
   transform: scale(1.2); 
   transition: transform 0.2s;
 }
+.modal-content.mobile .add-recipe-button.login.add.recenzie.stergeReteta {
+  bottom: 5vh;
+  left: 72vw;
+}
 .add-recipe-button.login.add.recenzie.stergeReteta {
   background-color: red !important;
   width: 6vw !important;
@@ -384,10 +397,23 @@ input[type="checkbox"]:checked + label::after {
   border-radius: 15px !important;
   position: absolute !important;
   left: 70vw;
-  bottom: 1vw;
+  bottom: 4vh;
 }
 .stergeReteta:hover {
   border: none !important;
+}
+.modal-inf.flex-col .descriereinf {
+  align-items: center !important;
+}
+.modal-content.mobile {
+  width: 100vw;
+  min-height: 100vh;
+  overflow-y: auto; /* Permite scroll-ul vertical */
+  background-color: #F8F8F8;
+}
+.modal-inf.flex-col .rate {
+  position: relative;
+  right: 0;
 }
 @media screen and (max-width: 1400px)
 {
@@ -412,7 +438,7 @@ input[type="checkbox"]:checked + label::after {
 }
 @media screen and (max-width: 1000px)
 {
-  .add-recipe-button.login.add.recenzie {width: 8vw;}
+  .add-recipe-button.login.add.recenzie,.add-recipe-button.login.add.recenzie.stergeReteta {width: 8vw !important;}
   .filter-button, .sort-button {
     width: 19vw;
   }
@@ -426,7 +452,7 @@ input[type="checkbox"]:checked + label::after {
 }
 @media screen and (max-width: 800px)
 {
-  .add-recipe-button.login.add.recenzie {width: 10vw;}
+  .add-recipe-button.login.add.recenzie,.add-recipe-button.login.add.recenzie.stergeReteta {width: 10vw !important;}
   .filter-button, .sort-button {
     width: 23vw;
   }
@@ -444,7 +470,7 @@ input[type="checkbox"]:checked + label::after {
 }
 @media screen and (max-width: 600px)
 {
-  .add-recipe-button.login.add.recenzie {width: 14vw;}
+  .add-recipe-button.login.add.recenzie,.add-recipe-button.login.add.recenzie.stergeReteta {width: 14vw !important;}
   .search-container {
     width: 75vw;
   }
@@ -463,7 +489,7 @@ input[type="checkbox"]:checked + label::after {
 }
 @media screen and (max-width: 500px)
 {
-  .add-recipe-button.login.add.recenzie {width: 18vw;}
+  .add-recipe-button.login.add.recenzie,.add-recipe-button.login.add.recenzie.stergeReteta {width: 22vw !important;}
   .search-container {
     width: 85vw;
   }

@@ -40,7 +40,19 @@ p {
 .p1 {
     margin-left: 1vw;
 }
-
+.w-75 p {
+    overflow-wrap: break-word; /* Sparge cuvintele prea lungi */
+  word-wrap: break-word; /* Compatibilitate mai largă */
+  word-break: break-word; /* Sparge cuvintele lungi */
+  overflow: hidden; /* Previne scrolling-ul */
+  white-space: normal; /* Permite textului să fie pe mai multe linii */
+  display: block; /* Asigură un comportament bloc */
+  line-height: 1.5; /* Setează spațierea între linii */
+}
+.no-scroll {
+    overflow-y: hidden;
+    height: 100%;
+}
 textarea:focus-visible {
     outline: none;
 }

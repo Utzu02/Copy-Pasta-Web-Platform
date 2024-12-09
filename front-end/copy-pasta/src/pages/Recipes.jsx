@@ -35,7 +35,7 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
     if (isSortOpen) setIsSortOpen(false);
   };
  const handleDelete =  async (id) => {
-  setSelectedRecipe(null);
+  closeModal()
   let updatedRecipes = recipes.filter (recipe => recipe._id !== id)
   setRecipes(updatedRecipes)
   updatedRecipes = searchedRecipes.filter (recipe => recipe._id !== id)
@@ -215,10 +215,10 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
   };
 
   const closeModal = () => {
-    setSelectedRecipe(null);
+    setSelectedRecipe(null);document.documentElement.style.overflow = '';
   };
   const handleRecipeClick = (recipe) => {
-    setSelectedRecipe(recipe);
+    setSelectedRecipe(recipe);document.documentElement.style.overflow = 'hidden';
   };
   return (
     <div className={`${menuOpen && 'blur'}`}>
@@ -325,9 +325,9 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
       </div>
       {selectedRecipe && (
         <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className={`modal-content ${isMobile&&'mobile'}`} onClick={(e) => e.stopPropagation()}>
             <button className="close-button" onClick={closeModal}>✖</button>
-            <div className='flex flex-row modal-inf'>
+            <div className={`flex ${!isMobile&&'flex-row'} ${isMobile&&'flex-col'} modal-inf`}>
               <img src={`http://localhost:5000${selectedRecipe.image}`} alt={selectedRecipe.title} />
               <div className='flex flex-col descriereinf'>
                 <h2>{selectedRecipe.title}</h2>
