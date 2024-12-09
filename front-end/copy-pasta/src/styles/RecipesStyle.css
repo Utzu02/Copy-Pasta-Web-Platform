@@ -349,10 +349,20 @@ input[type="checkbox"]:checked + label::after {
   padding-right: 1.5vw !important;
 }
 .rate.rateRecipe span:hover {
-  transform: scale(1.2); /* Mărește steaua la hover */
+  transform: scale(1.2); 
   transition: transform 0.2s;
 }
-
+.add-recipe-button.login.add.recenzie.stergeReteta {
+  background-color: red !important;
+  width: 5vw !important;
+  border-radius: 15px !important;
+  position: absolute !important;
+  right: 5vw;
+  bottom: 5vw;
+}
+.stergeReteta:hover {
+  border: none !important;
+}
 @media screen and (max-width: 1400px)
 {
   .search-container {

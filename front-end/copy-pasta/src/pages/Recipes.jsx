@@ -62,10 +62,11 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
   const startOptions = [{}, {}, {}, {}, {}];
   const deleteButton = (numeReteta) => {
     if(userName==numeReteta) return (
-      <button className={`add-recipe-button login add recenzie ${isMobile && 'mobile'}`}>
+      <button className={`add-recipe-button login stergeReteta add recenzie ${isMobile && 'mobile'}`}>
         Sterge reteta
       </button>
     )
+    else console.log(userName)
   }
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -297,7 +298,7 @@ const Recipes = ({ menuOpen, userName, isMobile }) => {
 
 
             <div className='flex descriereretetamodal'><div className='w-75' ><p>{selectedRecipe.description}</p></div></div>
-            {deleteButton(selectedRecipe.name)}
+            {deleteButton(selectedRecipe.author)}
           </div>
         </div>
       )}
