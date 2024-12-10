@@ -1,20 +1,51 @@
-# Proba-IT-2024-Template
+# **Copy Pasta Web Platform**
 
-### Acest template public poate fi folosit pentru a vă crea repository-ul pentru proba tehnică. El permite și crearea automată de issue-uri, în concordanță cu task-urile probei:
-* Homepage
-* Profile
-* Register & Login
-* Add Recipes Page
-* Recipes Page & Search
+---
 
-### Pentru a crea un repo privat și pentru a rula workflow-ul pentru issue-uri, se vor urma pașii de mai jos:
-* Repository privat:
-    * În colțul din dreapta-sus, apasă pe butonul „Use this template”, apoi pe cel de „Create a new repository” pentru a crea un repository în contul tău de GitHub.
-* Adaugă token-ul tău de GitHub la Repository Secrets:
-    * În repo-ul tău, mergi la secțiunea de „Settings”.
-    * Selectează „Secrets and variables” > „Actions” > „New repository secret”.
-    * Creează un secret nou, cu numele „TOKEN”, și introdu token-ul de acces personal. Mai multe detalii [aici](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic).
-* Rulează workflow-ul:
-    * Mergi la secțiunea „Actions” din repository-ul tău.
-    * Selectează „Initialise Repo” > „Run workflow”.
-    * După ce workflow-ul va termina de rulat, la secțiunea de „Issues” vor apărea cele 5 issue-uri menționate mai sus.
+## **📋 Rezumat**  
+- **Task-uri rezolvate**:
+  - **Homepage✅**
+  - **Profil✅**
+    - Fără posibilitatea de a schimba informațiile❌
+  - **Login & Register✅**
+    - Cookies✅
+  - **Rețete & Search✅**
+      - Sortare în funcție de nume✅
+      - Rating rețete✅
+      - Utilizatorul poate șterge rețetele proprii✅
+   - **Adăugare rețete✅**
+      - Upload Photo✅
+   - **Bonus: Redirecționarea rutelor care nu există pe ruta /not-found✅**
+   - **Mobile responsive✅**
+   - **Baza de date nu este locală, rulează pe servere mongoDB, așa ca este nevoie de parola pentru ca serverul să se conecteze la aceasta**
+- **Lucruri învățate**:
+  - Cum să folosesc Node, React si mongoDB
+  - Noțiuni fundamentale React si Node
+  - Tipuri de request-uri (GET,PUT,POST,DELETE)
+  - Raspunsuri request
+  - Îmbunătățirea cunoștințelor actuale
+  - Cookies
+  - Utilizarea componentelor
+- **Serverul de Frontend rulează pe portul 5173, iar cel de Backend pe portul 5500**
+---
+
+## **📂 Structura Proiectului**
+
+### **Frontend**
+- **Framework**: React@Vite
+
+### **Backend**
+- **Framework**: Node.js + Express  
+- **Database**: MongoDB  
+## **📦 Instalare**
+
+### **Deschidere Server Frontend**  
+```bash
+cd front-end/copy-pasta
+npm run dev
+```
+### **Deschidere Server Backend**
+```bash
+cd back-end
+npm run utzu (utzu -> comandă pentru Nodemon)
+```
