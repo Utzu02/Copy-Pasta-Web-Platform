@@ -6,7 +6,7 @@
 - **Task-uri rezolvate**:
   - **Homepage✅**
   - **Profil✅**
-    - fără posibilitatea de a schimba informațiile
+    - Fără posibilitatea de a schimba informațiile❌
   - **Login & Register✅**
     - Cookies✅
   - **Rețete & Search✅**
@@ -15,8 +15,8 @@
       - Utilizatorul poate șterge rețetele proprii✅
    - **Adăugare rețete✅**
       - Upload Photo✅
-   - **Bonus: Redirecționarea rutelor care nu există pe ruta /not-found**
-   - **Mobile responsive**
+   - **Bonus: Redirecționarea rutelor care nu există pe ruta /not-found✅**
+   - **Mobile responsive✅**
    - **Baza de date nu este locală, rulează pe servere mongoDB, așa ca este nevoie de parola pentru ca serverul să se conecteze la aceasta**
 - **Lucruri învățate**:
   - Cum să folosesc Node, React si mongoDB
