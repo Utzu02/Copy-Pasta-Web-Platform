@@ -17,6 +17,7 @@
       - Upload Photo✅
    - **Bonus: Redirecționarea rutelor care nu există pe ruta /not-found**
    - **Mobile responsive**
+   - **Baza de date nu este locală, rulează pe servere mongoDB, așa ca este nevoie de parola pentru ca serverul să se conecteze la aceasta**
 - **Lucruri învățate**:
   - Cum să folosesc Node, React si mongoDB
   - Noțiuni fundamentale React si Node
