@@ -312,7 +312,7 @@ input[type="checkbox"]:checked + label::after {
   padding-top: 5vh;
 }
 .modal-content img {
-  height: 20vh;
+  height: 25vh;
 }
 .modal-inf {
   margin-top: 3vh;
